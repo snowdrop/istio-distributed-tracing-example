@@ -28,6 +28,7 @@
     <modules>
         <module>suggestion-service</module>
         <module>album-service</module>
+        <module>album-details-service</module>
         <module>store-service</module>
     </modules>
 

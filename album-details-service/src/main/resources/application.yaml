@@ -1,8 +1,4 @@
-server.port: ${album-service.port}
-
-service:
-  album-details:
-    name: ${album-details-service.endpoint}
+server.port: ${album-details-service.port}
 
 opentracing:
   jaeger:

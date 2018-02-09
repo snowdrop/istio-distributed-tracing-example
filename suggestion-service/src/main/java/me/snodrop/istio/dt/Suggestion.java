@@ -1,5 +1,7 @@
 package me.snodrop.istio.dt;
 
+import java.util.Map;
+
 public class Suggestion {
 
     private final Album album;
@@ -22,6 +24,7 @@ public class Suggestion {
 
         private String name;
         private String artist;
+        private Map<String, String> details;
 
         public String getName() {
             return name;
@@ -37,6 +40,14 @@ public class Suggestion {
 
         public void setArtist(String artist) {
             this.artist = artist;
+        }
+
+        public Map<String, String> getDetails() {
+            return details;
+        }
+
+        public void setDetails(Map<String, String> details) {
+            this.details = details;
         }
     }
 
