@@ -1,0 +1,14 @@
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: suggest-redir
+spec:
+  destination:
+    name: suggestion-service
+  match:
+    request:
+      headers:
+        uri:
+          prefix: /suggest # prefix
+  rewrite:
+    uri: /  # drop the /suggest prefix when talking to suggestion-service service such as /suggest/serial -> /serial

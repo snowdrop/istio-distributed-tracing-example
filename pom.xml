@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.snowdrop</groupId>
+    <artifactId>istio-distributed-tracing-spring-boot</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>io.openshift.booster</groupId>
+        <artifactId>spring-boot-booster-parent</artifactId>
+        <version>1.5.10.Beta3</version>
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+
+        <opentracing-tracer.version>0.0.1-SNAPSHOT</opentracing-tracer.version>
+
+        <jaeger.endpoint.local>http://localhost:14268/api/traces</jaeger.endpoint.local>
+        <jaeger.endpoint.ocp>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint.ocp>
+        <jaeger.endpoint>${jaeger.endpoint.local}</jaeger.endpoint>
+    </properties>
+
+    <modules>
+        <module>suggestion-service</module>
+        <module>album-service</module>
+        <module>store-service</module>
+    </modules>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <profiles>
+                        <profile>development</profile>
+                    </profiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>sonatype-snapshot</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>jboss-snapshots-repository</id>
+            <name>JBoss Snapshots Repository</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+</project>
