@@ -12,3 +12,11 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
     $ http $(minishift openshift service istio-ingress -n istio-system --url)/suggest/serial
     $ http $(minishift openshift service istio-ingress -n istio-system --url)/suggest/parallel
 ```
+
+The traces from the invocation of the two endpoints should look like the following:
+
+* Serial
+![](images/serial.jpg)
+
+* Parallel
+![](images/parallel.jpg)
