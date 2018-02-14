@@ -12,7 +12,7 @@
     <parent>
         <groupId>io.openshift.booster</groupId>
         <artifactId>spring-boot-booster-parent</artifactId>
-        <version>1.5.10.Beta3</version>
+        <version>1.5.10-6</version>
     </parent>
 
     <properties>
