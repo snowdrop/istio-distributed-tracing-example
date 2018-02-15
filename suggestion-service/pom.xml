@@ -60,9 +60,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                        <configuration>
-                            <profile>spring-boot-profile</profile>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
