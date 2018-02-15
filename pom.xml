@@ -18,6 +18,8 @@
     <properties>
         <java.version>1.8</java.version>
 
+        <fabric8-maven-plugin.version>3.5.34</fabric8-maven-plugin.version>
+
         <opentracing-tracer.version>0.0.1-SNAPSHOT</opentracing-tracer.version>
 
         <jaeger.endpoint.local>http://localhost:14268/api/traces</jaeger.endpoint.local>
