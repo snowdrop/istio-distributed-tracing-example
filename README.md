@@ -8,9 +8,9 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
     $ oc new-project demo-istio
     $ oc adm policy add-scc-to-user privileged -z default -n demo-istio
     $ mvn clean package fabric8:deploy -Pistio-openshift
+    $ oc expose svc istio-ingress -n istio-system
     $ oc create -f rules/route-rule-redir.yml    
-    $ http $(minishift openshift service istio-ingress -n istio-system --url)/suggest/serial
-    $ http $(minishift openshift service istio-ingress -n istio-system --url)/suggest/parallel
+    $ open $(minishift openshift service istio-ingress -n istio-system --url)/suggest/
 ```
 
 The traces from the invocation of the two endpoints should look like the following:

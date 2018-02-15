@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>me.snowdrop</groupId>
             <artifactId>opentracing-tracer-jaeger-spring-web-starter</artifactId>
             <version>${opentracing-tracer.version}</version>
