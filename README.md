@@ -15,12 +15,12 @@ To install Istio (version `0.4.0` has been tested and works, version `0.6.0` is 
 ## Deploy project onto Minishift
 
 ```bash
-    $ oc new-project demo-istio
-    $ oc adm policy add-scc-to-user privileged -z default -n demo-istio
-    $ mvn clean package fabric8:deploy -Pistio-openshift
-    $ oc expose svc istio-ingress -n istio-system
-    $ oc create -f rules/route-rule-redir.yml    
-    $ open $(minishift openshift service istio-ingress -n istio-system --url)/suggest/
+    oc new-project demo-istio
+    oc adm policy add-scc-to-user privileged -z default -n demo-istio
+    mvn clean package fabric8:deploy -Pistio-openshift
+    oc expose svc istio-ingress -n istio-system
+    oc create -f rules/route-rule-redir.yml    
+    open $(minishift openshift service istio-ingress -n istio-system --url)/suggest/
 ```
 
 The traces from the invocation of the two endpoints should look like the following:
