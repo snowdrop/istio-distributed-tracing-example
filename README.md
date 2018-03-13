@@ -10,6 +10,7 @@ To install Istio simply follow one of the following docs:
     * https://istio.io/docs/setup/kubernetes/quick-start.html
     * https://istio.io/docs/setup/kubernetes/ansible-install.html
 - Login to the cluster with the admin user
+- Jaeger installed in the istio-system namespace
 
 ## Deploy project onto Minishift
 
