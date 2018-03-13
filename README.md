@@ -2,7 +2,16 @@
 
 Showcase Istio's Distributed Tracing capabilities with a set of properly instrumented Spring Boot applications
 
-## Deploy on Minishift
+## Prerequisites
+
+- Minishift running an Openshift 1.7 cluster
+- Istio installed on the aforementioned cluster.
+To install Istio simply follow one of the following docs:
+    * https://istio.io/docs/setup/kubernetes/quick-start.html
+    * https://istio.io/docs/setup/kubernetes/ansible-install.html
+- Login to the cluster with the admin user
+
+## Deploy project onto Minishift
 
 ```bash
     $ oc new-project demo-istio
