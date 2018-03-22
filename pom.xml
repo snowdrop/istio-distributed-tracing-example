@@ -9,6 +9,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>Spring Boot - Istio Distributed Tracing Booster</name>
+    <description>Spring Boot - Istio Distributed Tracing Booster</description>
+
     <parent>
         <groupId>io.openshift.booster</groupId>
         <artifactId>spring-boot-booster-parent</artifactId>
