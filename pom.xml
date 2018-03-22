@@ -77,7 +77,7 @@
                         <inherited>false</inherited>
                         <configuration>
                             <excludedArtifacts>
-                                spring-boot-circuit-breaker
+                                spring-boot-istio-distributed-tracing-parent
                             </excludedArtifacts>
                         </configuration>
                     </plugin>
