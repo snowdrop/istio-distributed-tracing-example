@@ -114,7 +114,7 @@
                             <dependency>
                                 <groupId>me.snowdrop</groupId>
                                 <artifactId>fmp-istio-enricher</artifactId>
-                                <version>1.0-SNAPSHOT</version>
+                                <version>0.2-SNAPSHOT</version>
                             </dependency>
                             <!-- Version of the model required to use istio enricher -->
                             <dependency>
@@ -134,13 +134,6 @@
                         <configuration>
                             <profile>istio-default</profile>
                             <skip>${skip.fmp}</skip>
-                            <enricher>
-                                <config>
-                                    <fmp-istio-enricher>
-                                        <istioVersion>0.4.0</istioVersion>
-                                    </fmp-istio-enricher>
-                                </config>
-                            </enricher>
                         </configuration>
                     </plugin>
                 </plugins>
