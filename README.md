@@ -16,7 +16,8 @@ To install Istio (version `0.4.0` has been tested and works, version `0.6.0` is 
 
 ```bash
     oc new-project demo-istio
-    oc adm policy add-scc-to-user privileged -z default -n demo-istio
+    oc label namespace demo-istio istio-injection=enabled
+    (manually change the policy field to disabled in configmap istio-inject in the istio-system namespace)
     mvn clean package fabric8:deploy -Popenshift
     oc expose svc istio-ingress -n istio-system
     oc create -f rules/route-rule-redir.yml    
