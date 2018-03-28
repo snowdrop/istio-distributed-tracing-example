@@ -57,7 +57,7 @@
 
         function clickHandlerBinder(name) {
             $("#" + name +"-invoke").click(function (e) {
-                $.getJSON(name, function (res) {
+                $.getJSON("suggest/" + name, function (res) {
                     $("#" + name + "-result").html(JSON.stringify(res, undefined, 2));
                 });
                 e.preventDefault();
