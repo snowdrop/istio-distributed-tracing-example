@@ -4,9 +4,9 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
 
 ## Prerequisites
 
-- Minishift running an Openshift 3.7 cluster
+- Openshift 3.9 cluster
 - Istio installed on the aforementioned cluster.
-To install Istio (version `0.4.0` has been tested and works, version `0.6.0` is known to NOT work) simply follow one of the following docs:
+To install Istio (version `0.6.0` had been tested and is known to work) simply follow one of the following docs:
     * https://istio.io/docs/setup/kubernetes/quick-start.html
     * https://istio.io/docs/setup/kubernetes/ansible-install.html
 - Login to the cluster with the admin user
