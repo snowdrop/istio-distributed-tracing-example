@@ -36,10 +36,10 @@ Furthermore, it's required to manually change the `policy` field to `disabled` i
     oc create -f album-details-service/.openshiftio/application.yaml 
     oc create -f store-service/.openshiftio/application.yaml
 
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=suggestion-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=album-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-details-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=album-details-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-store-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=store-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=suggestion-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-details-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-details-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-store-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=store-service
 ```
 
 ### Expose services
