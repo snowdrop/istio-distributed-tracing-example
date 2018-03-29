@@ -31,10 +31,10 @@ Furthermore, it's required to manually change the `policy` field to `disabled` i
 
 ### Build using s2i
 ```bash
-    oc create -f templates/suggestion-service.yaml
-    oc create -f templates/album-service.yaml
-    oc create -f templates/album-details-service.yaml 
-    oc create -f templates/store-service.yaml
+    oc create -f suggestion-service/.openshiftio/application.yaml
+    oc create -f album-service/.openshiftio/application.yaml
+    oc create -f album-details-service/.openshiftio/application.yaml 
+    oc create -f store-service/.openshiftio/application.yaml
 
     oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=suggestion-service
     oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=template-test -p SOURCE_REPOSITORY_DIR=album-service
