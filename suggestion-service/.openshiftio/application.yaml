@@ -40,6 +40,24 @@ parameters:
   displayName:
   required: false
 objects:
+- apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: ${project.artifactId}
+    annotations:
+      kubernetes.io/ingress.class: istio
+  spec:
+    rules:
+    - http:
+        paths:
+        - path: /suggest
+          backend:
+            serviceName: ${project.artifactId}
+            servicePort: 8080
+        - path: /suggest/.*
+          backend:
+            serviceName: ${project.artifactId}
+            servicePort: 8080
 - apiVersion: v1
   kind: ImageStream
   metadata:
