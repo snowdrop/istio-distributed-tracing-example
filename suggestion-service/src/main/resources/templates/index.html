@@ -57,11 +57,20 @@
 
         function clickHandlerBinder(name) {
             $("#" + name +"-invoke").click(function (e) {
-                $.getJSON(name, function (res) {
+
+                $.getJSON(createURL(name), function (res) {
                     $("#" + name + "-result").html(JSON.stringify(res, undefined, 2));
                 });
                 e.preventDefault();
             });
+        }
+
+        function createURL(name) {
+          if (window.location.href.endsWith("/")) {
+            return name;
+          }
+
+          return "suggest/" + name;
         }
     });
 </script>
