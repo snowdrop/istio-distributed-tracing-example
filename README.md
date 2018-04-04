@@ -5,8 +5,8 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
 ## Prerequisites
 
 - Openshift 3.9 cluster
-- Istio installed on the aforementioned cluster.
-To install Istio (version `0.6.0` had been tested and is known to work) simply follow one of the following docs:
+- Istio 0.6.0 (without auth enabled) installed on the aforementioned cluster.
+To install Istio simply follow one of the following docs:
     * https://istio.io/docs/setup/kubernetes/quick-start.html
     * https://istio.io/docs/setup/kubernetes/ansible-install.html
 - Login to the cluster with the admin user
