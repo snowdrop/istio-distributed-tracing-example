@@ -5,10 +5,12 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
 ## Prerequisites
 
 - Openshift 3.9 cluster
-- Istio 0.6.0 (without auth enabled) installed on the aforementioned cluster.
+- Istio 0.7.1 (without auth enabled) installed on the aforementioned cluster.
 To install Istio simply follow one of the following docs:
     * https://istio.io/docs/setup/kubernetes/quick-start.html
     * https://istio.io/docs/setup/kubernetes/ansible-install.html
+- Enable automatic sidecar injection for Istio
+  * See [this](https://istio.io/docs/setup/kubernetes/sidecar-injection.html) for details
 - Login to the cluster with the admin user
 - Jaeger installed in the istio-system namespace
 
@@ -19,15 +21,12 @@ To install Istio simply follow one of the following docs:
     oc label namespace demo-istio istio-injection=enabled
 ```
 
+**CAUTION**
+
 Furthermore, it's required to manually change the `policy` field to `disabled` in configmap `istio-inject` in the `istio-system` namespace
+and restart the `istio-sidecar-injector` pod
 
 ## Deploy project
-
-### Build using FMP
-
-```bash
-    mvn clean package fabric8:deploy -Popenshift
-```
 
 ### Build using s2i
 ```bash
