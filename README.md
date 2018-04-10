@@ -4,24 +4,55 @@ Showcase Istio's Distributed Tracing capabilities with a set of properly instrum
 
 ## Prerequisites
 
-- Minishift running an Openshift 3.7 cluster
-- Istio 0.6.0 (without auth enabled) installed on the aforementioned cluster.
+- Openshift 3.9 cluster
+- Istio 0.7.1 (without auth enabled) installed on the aforementioned cluster.
 To install Istio simply follow one of the following docs:
     * https://istio.io/docs/setup/kubernetes/quick-start.html
     * https://istio.io/docs/setup/kubernetes/ansible-install.html
+- Enable automatic sidecar injection for Istio
+  * See [this](https://istio.io/docs/setup/kubernetes/sidecar-injection.html) for details
 - Login to the cluster with the admin user
 - Jaeger installed in the istio-system namespace
 
-## Deploy project onto Minishift
+## Environment preparation
 
 ```bash
     oc new-project demo-istio
-    oc adm policy add-scc-to-user privileged -z default -n demo-istio
-    mvn clean package fabric8:deploy -Popenshift
-    oc expose svc istio-ingress -n istio-system
-    oc create -f rules/route-rule-redir.yml    
-    open $(minishift openshift service istio-ingress -n istio-system --url)/suggest/
+    oc label namespace demo-istio istio-injection=enabled
 ```
+
+**CAUTION**
+
+Furthermore, it's required to manually change the `policy` field to `disabled` in configmap `istio-inject` in the `istio-system` namespace
+and restart the `istio-sidecar-injector` pod
+
+## Deploy project
+
+### Build using s2i
+```bash
+    find . | grep openshiftio | grep application | xargs -n 1 oc apply -f
+
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=suggestion-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-details-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-details-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-store-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=store-service
+```
+
+### Expose services
+
+```bash
+    oc expose svc istio-ingress -n istio-system
+    oc create -f rules/route-rule-redir.yml
+```
+
+### Open the application
+
+Open the URL given by the following command:
+
+```bash
+echo http://$(oc get route istio-ingress -o jsonpath='{.spec.host}{"\n"}' -n istio-system)/suggest/
+```
+
 
 The traces from the invocation of the two endpoints should look like the following:
 
