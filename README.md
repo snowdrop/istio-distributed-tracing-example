@@ -70,10 +70,10 @@ echo http://$(oc get route istio-ingress -o jsonpath='{.spec.host}{"\n"}' -n ist
 The traces from the invocation of the two endpoints should look like the following:
 
 * Serial
-![](images/serial.jpg)
+![](suggestion-service/src/main/resources/static/serial.jpg)
 
 * Parallel
-![](images/parallel.jpg)
+![](suggestion-service/src/main/resources/static/parallel.jpg)
 
 
 ## Formal description
