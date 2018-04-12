@@ -31,7 +31,7 @@ and restart the `istio-sidecar-injector` pod
 ### Build using FMP
 
 ```bash
-    mvn clean package fabric8:deploy -Popenshift
+    mvn clean fabric8:deploy -Popenshift
 ```
 
 ### Build using s2i
