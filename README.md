@@ -14,6 +14,11 @@ To install Istio simply follow one of the following docs:
 - Login to the cluster with the admin user
 - Jaeger installed in the istio-system namespace
 
+### Note on istiooc
+
+The `istiooc cluster up --istio=true` command from [this](https://github.com/openshift-istio/origin/releases/) project 
+perfectly satisfies aforementioned requirements  
+
 ## Environment preparation
 
 ```bash
@@ -25,6 +30,8 @@ To install Istio simply follow one of the following docs:
 
 Furthermore, it's required to manually change the `policy` field to `disabled` in configmap `istio-inject` in the `istio-system` namespace
 and restart the `istio-sidecar-injector` pod
+
+This step is not needed when the cluster has been setup using `istiooc`
 
 ## Deploy project
 
