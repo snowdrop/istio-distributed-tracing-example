@@ -23,27 +23,17 @@
 
         <skip.fmp>true</skip.fmp>
 
-        <opentracing-tracer.version>0.1</opentracing-tracer.version>
-
         <!-- Default values  / used when no profile is activated-->
 
-        <suggestion-service.port>8090</suggestion-service.port>
-        <album-service.port>8091</album-service.port>
-        <album-details-service.port>8092</album-details-service.port>
-        <store-service.port>8093</store-service.port>
+        <greeting-service.port>8090</greeting-service.port>
+        <cutename-service.port>8091</cutename-service.port>
 
-        <album-service.endpoint>localhost:8091</album-service.endpoint>
-        <album-details-service.endpoint>localhost:8092</album-details-service.endpoint>
-        <store-service.endpoint>localhost:8093</store-service.endpoint>
-
-        <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
+        <cutename-service.endpoint>localhost:8091</cutename-service.endpoint>
     </properties>
 
     <modules>
-        <module>suggestion-service</module>
-        <module>album-service</module>
-        <module>album-details-service</module>
-        <module>store-service</module>
+        <module>greeting-service</module>
+        <module>cutename-service</module>
     </modules>
 
     <build>
@@ -94,16 +84,10 @@
             <id>openshift</id>
             <properties>
                 <!-- Override properties / used when deploying to Openshift -->
-                <suggestion-service.port>8080</suggestion-service.port>
-                <store-service.port>8080</store-service.port>
-                <album-service.port>8080</album-service.port>
-                <album-details-service.port>8080</album-details-service.port>
+                <greeting-service.port>8080</greeting-service.port>
+                <cutename-service.port>8080</cutename-service.port>
 
-                <store-service.endpoint>store-service:8080</store-service.endpoint>
-                <album-service.endpoint>album-service:8080</album-service.endpoint>
-                <album-details-service.endpoint>album-details-service:8080</album-details-service.endpoint>
-
-                <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
+                <cutename-service.endpoint>cutename-service:8080</cutename-service.endpoint>
             </properties>
             <build>
                 <plugins>

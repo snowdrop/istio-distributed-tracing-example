@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Spring Boot Istio - Distributed Tracing</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous"/>
+  <style>
+    hr {
+      border-top: 1px solid #8c8b8b;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <h2>Invoke service</h2>
+
+    <button id="invoke" type="submit" class="btn btn-success">Invoke</button>
+
+    <h3>Result:</h3>
+    <pre><code id="result">Invoke the serial implementation to see the result.</code></pre>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <h4>The traces can be viewed by navigating to the URL that is produced by the following
+      commands</h4>
+    <pre><code>echo https://$(oc get route/jaeger-query -n istio-system  -o 'jsonpath={.spec.host}')</code></pre>
+  </div>
+
+  <div class="row">
+    One the Jaeger UI, search for traces of the
+    <pre>istio-ingress<code></code></pre>
+  </div>
+
+
+  <div class="row">
+    <h4>The resulting traces should look like the following images</h4>
+
+    <div class="thumbnail">
+      <a href="traces.jpg">
+        <img src="traces.jpg" class="img-rounded img-responsive" alt="Parallel"/>
+        <div class="caption">
+          <p>Traces from Parallel invocation</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script th:inline="javascript">
+  $(document).ready(function () {
+    $("#invoke").click(function (e) {
+
+      $.getJSON(createURL("api/greeting"), function (res) {
+        $("#result").html(JSON.stringify(res, undefined, 2));
+      });
+      e.preventDefault();
+    });
+
+    function createURL(name) {
+      if (window.location.href.endsWith("/")) {
+        return name;
+      }
+
+      return "greeting/" + name;
+    }
+  });
+</script>
+</body>
+</html>

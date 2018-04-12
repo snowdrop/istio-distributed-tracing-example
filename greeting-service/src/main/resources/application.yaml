@@ -1,0 +1,14 @@
+server.port: ${greeting-service.port}
+
+service:
+  cutename:
+    name: ${cutename-service.endpoint}
+
+opentracing:
+  jaeger:
+    http-sender:
+      url: ${jaeger.endpoint}
+    service-name: ${project.artifactId}
+    enabled: true
+    enable-b3-propagation: true
+    log-spans: true
