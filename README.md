@@ -28,6 +28,12 @@ and restart the `istio-sidecar-injector` pod
 
 ## Deploy project
 
+### Build using FMP
+
+```bash
+    mvn clean package fabric8:deploy -Popenshift
+```
+
 ### Build using s2i
 ```bash
     find . | grep openshiftio | grep application | xargs -n 1 oc apply -f
