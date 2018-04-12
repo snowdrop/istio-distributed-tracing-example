@@ -32,10 +32,10 @@ and restart the `istio-sidecar-injector` pod
 ```bash
     find . | grep openshiftio | grep application | xargs -n 1 oc apply -f
 
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=suggestion-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-details-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=album-details-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-store-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=automatic -p SOURCE_REPOSITORY_DIR=store-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-suggestion-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=suggestion-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=album-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-album-details-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=album-details-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-store-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=store-service
 ```
 
 ### Expose services
