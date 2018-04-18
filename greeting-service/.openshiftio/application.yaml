@@ -50,11 +50,11 @@ objects:
     rules:
     - http:
         paths:
-        - path: /suggest
+        - path: /greeting
           backend:
             serviceName: greeting-service
             servicePort: 8080
-        - path: /suggest/.*
+        - path: /greeting/.*
           backend:
             serviceName: greeting-service
             servicePort: 8080
