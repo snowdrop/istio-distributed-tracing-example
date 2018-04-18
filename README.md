@@ -67,3 +67,6 @@ echo http://$(oc get route istio-ingress -o jsonpath='{.spec.host}{"\n"}' -n ist
 The traces from the invocation of the two endpoints should look like the following:
 
 ![](greeting-service/src/main/resources/static/traces.jpg)
+
+Note that it could take a few seconds for all the spans to be collected and presented in a trace
+that matches the picture above
