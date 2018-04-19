@@ -4,7 +4,7 @@ metadata:
   name: spring-boot-istio-distributed-tracing-booster-cutename-service
   annotations:
     iconClass: icon-spring
-    tags: spring-boot, circuit breaker, java, microservice
+    tags: spring-boot, distributed tracing, java, microservice
     openshift.io/display-name: Spring Boot - Istio Distributed Tracing
     openshift.io/provider-display-name: "Red Hat, Inc."
     description: >-
