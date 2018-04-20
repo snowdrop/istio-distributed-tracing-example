@@ -117,6 +117,8 @@ objects:
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      auth.istio.io/8080: NONE
     labels:
       app: greeting-service
       provider: snowdrop
