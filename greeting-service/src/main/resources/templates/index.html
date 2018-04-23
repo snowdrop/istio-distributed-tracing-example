@@ -15,8 +15,20 @@
 </head>
 
 <body>
-
 <div class="container">
+  <div class="row">
+    <h1>Istio Distributed Tracing Mission - Spring Boot</h1>
+    <p class="lead">
+        This mission showcases the interaction of Distributed Tracing capabilities of Istio and properly instrumented microservices.
+    </p>
+    <p>
+      In a microservice topology, where a single incoming HTTP call to the cluster could end up calling a host of other services, getting insights on the interactions of the individual services and performing debugging becomes complicated. Distributed tracing provides developers and operators the ability to gain insights on these interactions.
+    </p>
+    <p>
+      Here we'll learn how to integrate distributed tracing into an Istio / Spring Boot application, using Jaeger.
+    </p>
+    <hr />
+  </div>
   <div class="row">
     <h2>Invoke service</h2>
 
@@ -26,9 +38,12 @@
     <pre><code id="result">Invoke the serial implementation to see the result.</code></pre>
   </div>
 
-  <hr/>
-
   <div class="row">
+    <hr />
+    <h3>Instructions</h3>
+    <p>
+        Please reference the mission documentation or <a href="https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster/blob/master/README.md">README</a> for next steps and instructions.
+    </p>
     <h4>The traces can be viewed by navigating to the URL that is produced by the following
       commands</h4>
     <pre><code>echo https://$(oc get route/jaeger-query -n istio-system  -o 'jsonpath={.spec.host}')</code></pre>
