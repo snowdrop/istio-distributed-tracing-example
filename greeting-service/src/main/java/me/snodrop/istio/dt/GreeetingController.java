@@ -23,7 +23,7 @@ public class GreeetingController {
     private final String cutenameServiceName;
 
     public GreeetingController(RestTemplate restTemplate,
-                               @Value("${service.cutename.name}") String cutenameServiceName) {
+                               @Value("${service.cute-name.name}") String cutenameServiceName) {
         this.restTemplate = restTemplate;
         this.cutenameServiceName = cutenameServiceName;
     }

@@ -1,8 +1,8 @@
 server.port: ${greeting-service.port}
 
 service:
-  cutename:
-    name: ${cutename-service.endpoint}
+  cute-name:
+    name: ${cute-name-service.endpoint}
 
 opentracing:
   jaeger:

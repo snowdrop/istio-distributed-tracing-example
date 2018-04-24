@@ -26,14 +26,14 @@
         <!-- Default values  / used when no profile is activated-->
 
         <greeting-service.port>8090</greeting-service.port>
-        <cutename-service.port>8091</cutename-service.port>
+        <cute-name-service.port>8091</cute-name-service.port>
 
-        <cutename-service.endpoint>localhost:8091</cutename-service.endpoint>
+        <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
     </properties>
 
     <modules>
         <module>greeting-service</module>
-        <module>cutename-service</module>
+        <module>cute-name-service</module>
     </modules>
 
     <build>
@@ -85,9 +85,9 @@
             <properties>
                 <!-- Override properties / used when deploying to Openshift -->
                 <greeting-service.port>8080</greeting-service.port>
-                <cutename-service.port>8080</cutename-service.port>
+                <cute-name-service.port>8080</cute-name-service.port>
 
-                <cutename-service.endpoint>cutename-service:8080</cutename-service.endpoint>
+                <cute-name-service.endpoint>cute-name-service:8080</cute-name-service.endpoint>
             </properties>
             <build>
                 <plugins>

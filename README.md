@@ -46,7 +46,7 @@ This step is not needed when the cluster has been setup using `istiooc`
     find . | grep openshiftio | grep application | xargs -n 1 oc apply -f
 
     oc new-app --template=spring-boot-istio-distributed-tracing-booster-greeting-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=greeting-service
-    oc new-app --template=spring-boot-istio-distributed-tracing-booster-cutename-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=cutename-service
+    oc new-app --template=spring-boot-istio-distributed-tracing-booster-cute-name-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/spring-boot-istio-distributed-tracing-booster -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=cute-name-service
 ```
 
 ### Expose services

@@ -1,0 +1,1 @@
+server.port: ${cute-name-service.port}
