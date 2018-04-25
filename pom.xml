@@ -20,6 +20,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <opentracing-tracer.version>0.1</opentracing-tracer.version>
 
         <skip.fmp>true</skip.fmp>
 
@@ -29,6 +30,8 @@
         <cute-name-service.port>8091</cute-name-service.port>
 
         <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
+
+        <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
     </properties>
 
     <modules>
@@ -88,6 +91,8 @@
                 <cute-name-service.port>8080</cute-name-service.port>
 
                 <cute-name-service.endpoint>cute-name-service:8080</cute-name-service.endpoint>
+
+                <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
             </properties>
             <build>
                 <plugins>
