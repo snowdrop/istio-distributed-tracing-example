@@ -23,15 +23,15 @@ perfectly satisfies aforementioned requirements
 
 ```bash
     oc new-project demo-istio
-    oc label namespace demo-istio istio-injection=enabled
 ```
 
 **CAUTION**
 
-Furthermore, it's required to manually change the `policy` field to `disabled` in configmap `istio-inject` in the `istio-system` namespace
-and restart the `istio-sidecar-injector` pod
+In order for Istio automatic sidecar injection to work properly the following Istio configuration needs to be in place:
+* The `policy` field is set to `disabled` in the `istio-inject` configmap  of the `istio-system` namespace
+* The `istio-sidecar-injector` `MutatingWebhookConfiguration` should not limit the injection to properly labeled namespaces
 
-This step is not needed when the cluster has been setup using `istiooc`
+The aforementioned configuration is not needed when the cluster has been setup using `istiooc`
 
 ## Deploy project
 
