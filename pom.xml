@@ -3,20 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.openshift.booster</groupId>
+        <artifactId>spring-boot-booster-parent</artifactId>
+        <version>1.5.12-3</version>
+    </parent>
 
-    <groupId>me.snowdrop</groupId>
     <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.5.12-1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot - Istio Distributed Tracing Booster</name>
     <description>Spring Boot - Istio Distributed Tracing Booster</description>
 
-    <parent>
-        <groupId>io.openshift.booster</groupId>
-        <artifactId>spring-boot-booster-parent</artifactId>
-        <version>1.5.10-15</version>
-    </parent>
 
     <properties>
         <java.version>1.8</java.version>
@@ -35,8 +34,8 @@
     </properties>
 
     <modules>
-        <module>greeting-service</module>
-        <module>cute-name-service</module>
+        <module>spring-boot-istio-distributed-tracing-greeting-service</module>
+        <module>spring-boot-istio-distributed-tracing-cute-name-service</module>
     </modules>
 
     <build>
@@ -90,7 +89,7 @@
                 <greeting-service.port>8080</greeting-service.port>
                 <cute-name-service.port>8080</cute-name-service.port>
 
-                <cute-name-service.endpoint>cute-name-service:8080</cute-name-service.endpoint>
+                <cute-name-service.endpoint>spring-boot-istio-distributed-tracing-cute-name-service:8080</cute-name-service.endpoint>
 
                 <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
             </properties>
