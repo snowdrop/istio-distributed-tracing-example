@@ -4,7 +4,7 @@ metadata:
   name: greeting-redir
 spec:
   destination:
-    name: greeting-service
+    name: spring-boot-istio-distributed-tracing-greeting-service
   match:
     request:
       headers:
