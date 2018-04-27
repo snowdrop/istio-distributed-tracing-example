@@ -4,35 +4,31 @@
 Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Spring Boot applications
 
 == Prerequisites
+. Openshift 3.9 cluster
+. Istio 0.7.1 with authentication installed on the aforementioned cluster. To install Istio simply follow one of the following docs:
+.. https://istio.io/docs/setup/kubernetes/quick-start.html
+.. https://istio.io/docs/setup/kubernetes/ansible-install.html
+. Enable automatic sidecar injection for Istio (See https://istio.io/docs/setup/kubernetes/sidecar-injection.html[this] for details)
++
+In order for Istio automatic sidecar injection to work properly, the following Istio configuration needs to be in place:
++
+.. The `policy` field is set to `disabled` in the `istio-inject` configmap  of the `istio-system` namespace.
+.. The `istio-sidecar-injector` `MutatingWebhookConfiguration` should not limit the injection to properly labeled namespaces
 
-- Openshift 3.9 cluster
-- Istio 0.7.1 installed on the aforementioned cluster.
-To install Istio simply follow one of the following docs:
-    * https://istio.io/docs/setup/kubernetes/quick-start.html
-    * https://istio.io/docs/setup/kubernetes/ansible-install.html
-- Enable automatic sidecar injection for Istio
-  * See [this](https://istio.io/docs/setup/kubernetes/sidecar-injection.html) for details
-- Login to the cluster with the admin user
-- Jaeger installed in the istio-system namespace
-
-NOTE: The `istiooc cluster up --istio=true` command from https://github.com/openshift-istio/origin/releases/[this project] perfectly satisfy the above requirements.
-
-== Environment preparation
-
-```bash
-    oc new-project routing-mission
-```
-*CAUTION*:
-In order for Istio automatic sidecar injection to work properly the following Istio configuration needs to be in place:
-
-. The `policy` field is set to `disabled` in the `istio-inject` configmap  of the `istio-system` namespace
-. The `istio-sidecar-injector` `MutatingWebhookConfiguration` should not limit the injection to properly labeled namespaces
-. Expose services and Istio ingress
+. Expose services and Istio ingress:
 +
 ```
 oc expose svc istio-ingress -n istio-system
 ```
-The aforementioned configuration is not needed when the cluster has been setup using `istiooc`
+. Login to the cluster with the admin user
+
+== Environment preparation
+
+Create a new project/namespace on the cluster. This is where your application will be deployed.
+
+```bash
+oc new-project <whatever valid project name you want>
+```
 
 == Build and deploy the application
 
@@ -83,7 +79,7 @@ image::spring-boot-istio-distributed-tracing-greeting-service/src/main/resources
 Note that it could take a few seconds for all the spans to be collected and presented in a trace that matches the picture above
 
 
-= Undeploy the application
+== Undeploy the application
 
 === With Fabric8 Maven Plugin (FMP)
 ```bash
@@ -97,8 +93,8 @@ oc delete ingress --all
 find . | grep openshiftio | grep application | xargs -n 1 oc delete -f
 ```
 
-= Remove the namespace
+=== Remove the namespace
 This will delete the project from the OpenShift cluster
 ```bash
-oc delete project istio-security
+oc delete project <your project name>
 ```
