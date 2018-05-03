@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <opentracing-tracer.version>0.1</opentracing-tracer.version>
+        <opentracing-jaeger-starter.version>0.1.9</opentracing-jaeger-starter.version>
 
         <skip.fmp>true</skip.fmp>
 
