@@ -13,6 +13,7 @@
 
     <properties>
         <skip.fmp>false</skip.fmp>
+        <opentracing-jaeger-starter.version>0.1.9</opentracing-jaeger-starter.version>
     </properties>
 
     <dependencies>
