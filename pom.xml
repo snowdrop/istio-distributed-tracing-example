@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-    <version>1.5.12-2-SNAPSHOT</version>
+    <version>1.5.12-2</version>
     <packaging>pom</packaging>
 
     <name>Spring Boot - Istio Distributed Tracing Booster</name>
