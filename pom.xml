@@ -203,6 +203,18 @@
                 </plugins>
             </build>
         </profile>
+        
+        <profile>
+          <id>openshift-it</id>
+          <build>
+            <plugins>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+              </plugin>
+            </plugins>
+          </build>
+        </profile>
     </profiles>
 
 </project>
