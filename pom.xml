@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>io.openshift</groupId>
-        <artifactId>booster-parent</artifactId>
-        <version>22</version>
-    </parent>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.openshift</groupId>
+    <artifactId>booster-parent</artifactId>
+    <version>22</version>
+  </parent>
 
-    <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-    <version>1.5.13-3-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
+  <version>1.5.13-3-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <groupId>io.openshift.booster</groupId>
+  <groupId>io.openshift.booster</groupId>
   <name>Spring Boot - Istio Distributed Tracing Booster</name>
-    <description>Spring Boot - Istio Distributed Tracing Booster</description>
+  <description>Spring Boot - Istio Distributed Tracing Booster</description>
 
 
-    <properties>
-        <java.version>1.8</java.version>
+  <properties>
+    <java.version>1.8</java.version>
 
-        <skip.fmp>true</skip.fmp>
+    <skip.fmp>true</skip.fmp>
 
-        <!-- Default values  / used when no profile is activated-->
+    <!-- Default values  / used when no profile is activated-->
 
-        <greeting-service.port>8090</greeting-service.port>
-        <cute-name-service.port>8091</cute-name-service.port>
+    <greeting-service.port>8090</greeting-service.port>
+    <cute-name-service.port>8091</cute-name-service.port>
 
-        <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
+    <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
 
-        <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
-      <arquillian.version>1.4.0.Final</arquillian.version>
+    <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
+    <arquillian.version>1.4.0.Final</arquillian.version>
     <junit.version>4.12</junit.version>
     <spring-boot-bom.version>1.5.13.Final</spring-boot-bom.version>
     <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
@@ -87,127 +87,128 @@
     </dependency>
   </dependencies>
 
-    <modules>
-        <module>spring-boot-istio-distributed-tracing-greeting-service</module>
-        <module>spring-boot-istio-distributed-tracing-cute-name-service</module>
-    </modules>
+  <modules>
+    <module>spring-boot-istio-distributed-tracing-greeting-service</module>
+    <module>spring-boot-istio-distributed-tracing-cute-name-service</module>
+  </modules>
 
-    <build>
-        <testResources>
-          <testResource>
-            <directory>src/test/resources</directory>
-            <filtering>true</filtering>
-          </testResource>
-        </testResources>
-        <resources>
-          <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-          </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <profiles>
-                        <profile>development</profile>
-                    </profiles>
-                </configuration>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-maven-plugin</artifactId>
-              <version>${spring-boot.version}</version>
-              <configuration>
-                <classifier>exec</classifier>
-              </configuration>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>repackage</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-failsafe-plugin</artifactId>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>integration-test</goal>
-                    <goal>verify</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-          </plugins>
-      </pluginManagement>
+  <build>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <profiles>
+            <profile>development</profile>
+          </profiles>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <classifier>exec</classifier>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
-    <profiles>
-        <profile>
-            <id>openshift</id>
-            <properties>
-                <!-- Override properties / used when deploying to Openshift -->
-                <greeting-service.port>8080</greeting-service.port>
-                <cute-name-service.port>8080</cute-name-service.port>
+  <profiles>
+    <profile>
+      <id>openshift</id>
+      <properties>
+        <!-- Override properties / used when deploying to Openshift -->
+        <greeting-service.port>8080</greeting-service.port>
+        <cute-name-service.port>8080</cute-name-service.port>
 
-                <cute-name-service.endpoint>spring-boot-istio-distributed-tracing-cute-name-service:8080</cute-name-service.endpoint>
+        <cute-name-service.endpoint>spring-boot-istio-distributed-tracing-cute-name-service:8080
+        </cute-name-service.endpoint>
 
-                <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>fabric8-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>resource</goal>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <skip>${skip.fmp}</skip>
-                            <resources>
-                                <annotations>
-                                    <deployment>
-                                        <property>
-                                            <name>sidecar.istio.io/inject</name>
-                                            <value>true</value>
-                                        </property>
-                                    </deployment>
-                                    <service>
-                                        <property>
-                                            <name>auth.istio.io/8080</name>
-                                            <value>NONE</value>
-                                        </property>
-                                    </service>
-                                </annotations>
-                            </resources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-          <id>openshift-it</id>
-          <build>
-            <plugins>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-              </plugin>
-            </plugins>
-          </build>
-        </profile>
-    </profiles>
+        <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>fabric8-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>resource</goal>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <skip>${skip.fmp}</skip>
+              <resources>
+                <annotations>
+                  <deployment>
+                    <property>
+                      <name>sidecar.istio.io/inject</name>
+                      <value>true</value>
+                    </property>
+                  </deployment>
+                  <service>
+                    <property>
+                      <name>auth.istio.io/8080</name>
+                      <value>NONE</value>
+                    </property>
+                  </service>
+                </annotations>
+              </resources>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>openshift-it</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>
