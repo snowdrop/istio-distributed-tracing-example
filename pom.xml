@@ -32,7 +32,6 @@
 
     <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
     <arquillian.version>1.4.0.Final</arquillian.version>
-    <junit.version>4.12</junit.version>
     <spring-boot-bom.version>1.5.13.Final</spring-boot-bom.version>
     <spring-boot.version>1.5.13.RELEASE</spring-boot.version>
     <awaitility.version>1.7.0</awaitility.version>
