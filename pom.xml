@@ -11,7 +11,7 @@
 
   <groupId>io.openshift.booster</groupId>
   <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-  <version>1.5.13-3-SNAPSHOT</version>
+  <version>1.5.14-1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Spring Boot - Istio Distributed Tracing Booster</name>
