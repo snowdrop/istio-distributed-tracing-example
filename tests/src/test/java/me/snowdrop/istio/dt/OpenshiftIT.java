@@ -40,7 +40,7 @@ public class OpenshiftIT {
     private static boolean isInit = false;
     private static List<IstioResource> routeRule = null;
 
-    private final String APP_URL = "greeting/";
+    private static final String APP_URL = "greeting/";
 
     @Before
     public void init() throws Exception {
