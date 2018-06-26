@@ -40,7 +40,7 @@ public class OpenshiftIT {
     private static boolean isInit = false;
     private static List<IstioResource> routeRule = null;
 
-    private final String appUrl = "greeting/";
+    private final String APP_URL = "greeting/";
 
     @Before
     public void init() throws Exception {
@@ -55,17 +55,12 @@ public class OpenshiftIT {
                     .atMost(1, TimeUnit.MINUTES)
                     .until(() -> {
                 try {
-                    Response response = RestAssured.get(istioURL + appUrl);
+                    Response response = RestAssured.get(istioURL + APP_URL);
                     return response.getStatusCode() == 200;
                 } catch (Exception ignored) {
                     return false;
                 }
             });
-
-            // jaeger is using HTTPS with self-signed certificate
-            // allow acceptance of non-trusty certificates
-            RestAssured.useRelaxedHTTPSValidation();
-
             isInit = true;
         }
     }
@@ -103,24 +98,27 @@ public class OpenshiftIT {
     }
 
     /**
-     * Get a route from istio namespace
-     * @param routeName name of the route to get
-     * @return route URL, without the protocol specification
-     * @throws Exception In route is not found
+     * Get a Route from istio namespace
+     * @param routeName name of the Route to get
+     * @return Route URL, without the protocol specification
      */
-    private String getIstioRoute(String routeName) throws Exception {
+    private String getIstioRoute(String routeName) {
         Route istioRoute = openShiftAssistant.getClient()
                 .routes()
                 .inNamespace("istio-system")
                 .withName(routeName)
                 .get();
         if (istioRoute == null) {
-            throw new Exception("Istio " + routeName + " route not found");
+            throw new RuntimeException("Istio " + routeName + " route not found");
         }
         return istioRoute.getSpec().getHost() + "/";
     }
 
     private JSONArray getJaegerTraces(Long startTime) throws ParseException {
+        // jaeger is using HTTPS with self-signed certificate
+        // allow acceptance of non-trusty certificates
+        RestAssured.useRelaxedHTTPSValidation();
+
         Response response = RestAssured
                 .given()
                     .param("service","istio-ingress")
