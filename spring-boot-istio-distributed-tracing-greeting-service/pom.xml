@@ -30,7 +30,7 @@
     </dependency>
     <dependency>
       <groupId>io.opentracing.contrib</groupId>
-      <artifactId>opentracing-spring-cloud-starter-jaeger</artifactId>
+      <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
     </dependency>
   </dependencies>
 </project>
