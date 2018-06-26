@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: greeting-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - '*'
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: greeting-virtual-service
+spec:
+  hosts:
+  - '*'
+  gateways:
+  - greeting-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /greeting
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: spring-boot-istio-distributed-tracing-greeting-service
+        port:
+          number: 8080
+
