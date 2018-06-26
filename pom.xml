@@ -22,6 +22,11 @@
     <opentracing-jaeger-starter.version>0.1.4</opentracing-jaeger-starter.version>
     <spring-boot-bom.version>1.5.14.Final</spring-boot-bom.version>
     <spring-boot.version>1.5.14.RELEASE</spring-boot.version>
+    <rest-assured.version>3.1.0</rest-assured.version>
+    <arquillian-cube.version>1.16.0</arquillian-cube.version>
+    <arquillian-junit.version>1.4.0.Final</arquillian-junit.version>
+    <junit.version>4.12</junit.version>
+    <mksapi.version>4.10.9049</mksapi.version>
 
     <fabric8.generator.from>
       registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:${openjdk18-openshift.version}
@@ -67,12 +72,38 @@
         <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
         <version>${opentracing-jaeger-starter.version}</version>
       </dependency>
+      <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>${rest-assured.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.arquillian.cube</groupId>
+        <artifactId>arquillian-cube-istio-kubernetes</artifactId>
+        <version>${arquillian-cube.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jboss.arquillian.junit</groupId>
+        <artifactId>arquillian-junit-standalone</artifactId>
+        <version>${arquillian-junit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mks.api</groupId>
+        <artifactId>mksapi-jar</artifactId>
+        <version>${mksapi.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <modules>
     <module>spring-boot-istio-distributed-tracing-greeting-service</module>
     <module>spring-boot-istio-distributed-tracing-cute-name-service</module>
+    <module>tests</module>
   </modules>
 
   <build>
@@ -82,6 +113,12 @@
         <filtering>true</filtering>
       </resource>
     </resources>
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -158,6 +195,25 @@
                 </annotations>
               </resources>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>openshift-it</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
