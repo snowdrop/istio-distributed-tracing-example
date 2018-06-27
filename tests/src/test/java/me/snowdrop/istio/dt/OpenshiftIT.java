@@ -40,7 +40,7 @@ public class OpenshiftIT {
     private static boolean isInit = false;
     private static List<IstioResource> routeRule = null;
 
-    private final String APP_URL = "greeting/";
+    private static final String APP_URL = "greeting/";
 
     @Before
     public void init() throws Exception {
@@ -81,8 +81,7 @@ public class OpenshiftIT {
     public void tracingTest() throws ParseException, InterruptedException {
         Long startTime = TimeUnit.MILLISECONDS.toMicros(System.currentTimeMillis());
 
-        RestAssured
-                .get(istioURL + "greeting/api/greeting");
+        RestAssured.get(istioURL + "greeting/api/greeting");
 
         TimeUnit.SECONDS.sleep(10); // wait 10 seconds so span will show up in the jaeger
 
@@ -115,12 +114,10 @@ public class OpenshiftIT {
     }
 
     private JSONArray getJaegerTraces(Long startTime) throws ParseException {
-        // jaeger is using HTTPS with self-signed certificate
-        // allow acceptance of non-trusty certificates
-        RestAssured.useRelaxedHTTPSValidation();
 
         Response response = RestAssured
                 .given()
+                    .relaxedHTTPSValidation() //jaeger uses https, so we need to trust the cert
                     .param("service","istio-ingress")
                     .param("start",startTime)
                 .get(jaegerURL);
