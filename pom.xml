@@ -18,7 +18,7 @@
     <spring-boot-bom.version>1.5.14.Final</spring-boot-bom.version>
     <spring-boot.version>1.5.14.RELEASE</spring-boot.version>
     <rest-assured.version>3.1.0</rest-assured.version>
-    <arquillian-cube.version>1.16.0</arquillian-cube.version>
+    <arquillian-cube.version>1.17.0</arquillian-cube.version>
     <arquillian-junit.version>1.4.0.Final</arquillian-junit.version>
     <commons-logging.version>1.2</commons-logging.version>
     <junit.version>4.12</junit.version>
