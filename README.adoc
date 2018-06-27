@@ -111,3 +111,11 @@ This will delete the project from the OpenShift cluster
 ```bash
 oc delete project <your project name>
 ```
+
+== Integration tests
+
+To run integration tests, create a new namespace and run maven job
+```bash
+oc new-project <project-name>
+mvn clean verify -Popenshift,openshift-it
+```
