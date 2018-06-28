@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.openshift</groupId>
     <artifactId>booster-parent</artifactId>
     <version>22</version>
   </parent>
-
   <groupId>io.openshift.booster</groupId>
   <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
   <version>1.5.14-1-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>Spring Boot - Istio Distributed Tracing Booster</name>
   <description>Spring Boot - Istio Distributed Tracing Booster</description>
-
   <properties>
     <openjdk18-openshift.version>1.3</openjdk18-openshift.version>
     <opentracing-jaeger-starter.version>0.1.4</opentracing-jaeger-starter.version>
@@ -27,23 +22,17 @@
     <arquillian-junit.version>1.4.0.Final</arquillian-junit.version>
     <junit.version>4.12</junit.version>
     <mksapi.version>4.10.9049</mksapi.version>
-
     <fabric8.generator.from>
       registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:${openjdk18-openshift.version}
     </fabric8.generator.from>
-
     <java.version>1.8</java.version>
-
     <skip.fmp>true</skip.fmp>
-
     <!-- Default values  / used when no profile is activated-->
     <greeting-service.port>8090</greeting-service.port>
     <cute-name-service.port>8091</cute-name-service.port>
     <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
-
     <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
   </properties>
-
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -52,7 +41,6 @@
       <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -99,13 +87,11 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <modules>
     <module>spring-boot-istio-distributed-tracing-greeting-service</module>
     <module>spring-boot-istio-distributed-tracing-cute-name-service</module>
     <module>tests</module>
   </modules>
-
   <build>
     <resources>
       <resource>
@@ -136,7 +122,6 @@
           <profiles>
             <profile>development</profile>
           </profiles>
-          <classifier>exec</classifier>
         </configuration>
         <executions>
           <execution>
@@ -148,7 +133,6 @@
       </plugin>
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>openshift</id>
@@ -156,11 +140,9 @@
         <!-- Override properties / used when deploying to Openshift -->
         <greeting-service.port>8080</greeting-service.port>
         <cute-name-service.port>8080</cute-name-service.port>
-
         <cute-name-service.endpoint>
           spring-boot-istio-distributed-tracing-cute-name-service:8080
         </cute-name-service.endpoint>
-
         <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
       </properties>
       <build>
@@ -214,6 +196,9 @@
                 </goals>
               </execution>
             </executions>
+            <configuration>
+              <classesDirectory>${project.build.directory}/${artifactId}.jar.original</classesDirectory>
+            </configuration>
           </plugin>
         </plugins>
       </build>
