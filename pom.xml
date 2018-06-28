@@ -136,7 +136,7 @@
           <profiles>
             <profile>development</profile>
           </profiles>
-          <classifier>exec</classifier>
+          <!--<classifier>exec</classifier>-->
         </configuration>
         <executions>
           <execution>
