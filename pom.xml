@@ -196,9 +196,7 @@
                 </goals>
               </execution>
             </executions>
-            <configuration>
-              <classesDirectory>${project.build.directory}/${artifactId}.jar.original</classesDirectory>
-            </configuration>
+            <configuration/>
           </plugin>
         </plugins>
       </build>
