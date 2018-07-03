@@ -59,17 +59,17 @@
       <scope>test</scope>
     </dependency>
 
+    <!--
+    We need this because Apache httpclient depends on it
+    but the import of the Spring Boot BOM excludes it
+    (which makes sense for regular Spring Boot applications since they use jcl-over-slf4j,
+    but doesn't make sense for test artifacts like this one)
+    -->
     <dependency>
-      <groupId>io.openshift.booster</groupId>
-      <artifactId>spring-boot-istio-distributed-tracing-greeting-service</artifactId>
-      <version>${project.version}</version>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>io.openshift.booster</groupId>
-      <artifactId>spring-boot-istio-distributed-tracing-cute-name-service</artifactId>
-      <version>${project.version}</version>
-    </dependency>
   </dependencies>
 
   <build>
@@ -110,6 +110,25 @@
               <skip>false</skip>
               <profile>aggregate</profile>
             </configuration>
+            <!--
+               We add the dependencies to the two modules that need to be deployed for the tests
+               to run.
+               This is done in order to make FMP pick up the generated Openshift
+               resources file of each module and create an "uber" resources file containing
+               resources for both modules (which is what the aggregate profile above does)
+            -->
+            <dependencies>
+              <dependency>
+                <groupId>io.openshift.booster</groupId>
+                <artifactId>spring-boot-istio-distributed-tracing-greeting-service</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>io.openshift.booster</groupId>
+                <artifactId>spring-boot-istio-distributed-tracing-cute-name-service</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+            </dependencies>
           </plugin>
         </plugins>
       </build>
