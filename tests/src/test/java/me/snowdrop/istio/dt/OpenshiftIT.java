@@ -6,68 +6,41 @@ import static org.awaitility.Awaitility.await;
 import io.fabric8.openshift.api.model.v4_0.Route;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import me.snowdrop.istio.api.model.IstioResource;
-import org.apache.commons.io.IOUtils;
-import org.arquillian.cube.istio.impl.IstioAssistant;
+import org.arquillian.cube.istio.api.IstioResource;
 import org.arquillian.cube.openshift.impl.client.OpenShiftAssistant;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
+@IstioResource("classpath:greeting-gateway.yml")
 public class OpenshiftIT {
 
     private static final String ISTIO_NAMESPACE = "istio-system";
     private static final String ISTIO_INGRESS_GATEWAY_ROUTE = "istio-ingressgateway";
     private static final String ISTIO_INGRESS_GATEWAY_SERVICE_NAME = "istio-ingressgateway";
     private static final String JAEGER_QUERY_ROUTE = "jaeger-query";
-    private static final String ISTIO_RESOURCES_PATH = "../rules/";
-    private static final String ISTIO_RESOURCES_FILENAME = "greeting-gateway.yml";
-
-    @ArquillianResource
-    private IstioAssistant istioAssistant;
 
     @ArquillianResource
     private OpenShiftAssistant openShiftAssistant;
 
-    private static String istioIngressGatewayRouteURL;
-    private static String jaegerTracesURL;
-    private static boolean needsToInitialize = true;
-    private static List<IstioResource> istioResources;
+    private String istioIngressGatewayRouteURL;
+    private String jaegerTracesURL;
 
     @Before
-    public void init() throws Exception {
-        // initiate only before first test
-        if (needsToInitialize) {
-            istioIngressGatewayRouteURL = "http://" + getRouteInIstioNamespace(ISTIO_INGRESS_GATEWAY_ROUTE);
-            jaegerTracesURL = "https://" + getRouteInIstioNamespace(JAEGER_QUERY_ROUTE) + "api/traces";
+    public void init() {
+        istioIngressGatewayRouteURL = "http://" + getRouteInIstioNamespace(ISTIO_INGRESS_GATEWAY_ROUTE);
+        jaegerTracesURL = "https://" + getRouteInIstioNamespace(JAEGER_QUERY_ROUTE) + "api/traces";
 
-            istioResources = deployIstioResources(ISTIO_RESOURCES_FILENAME);
-            waitUntilApplicationIsReady();
-
-            needsToInitialize = false;
-        }
+        waitUntilApplicationIsReady();
     }
 
-    @After
-    public void cleanup() {
-        if (istioResources != null){
-            istioAssistant.undeployIstioResources(istioResources);
-        }
-    }
 
     /**
      * Interacts with application and test if traces are present in jaeger
@@ -160,26 +133,19 @@ public class OpenshiftIT {
         return istioRoute.getSpec().getHost() + "/";
     }
 
-    private List<IstioResource> deployIstioResources(String filename) throws IOException {
-        final InputStream fileInputStream = Files.newInputStream(Paths.get(ISTIO_RESOURCES_PATH + filename));
-        final String fileContent = IOUtils.toString(fileInputStream, StandardCharsets.UTF_8);
-        return istioAssistant.deployIstioResources(fileContent);
-    }
-
     // wait until the Istio Ingress Gateway responds with HTTP 200 at the path that is specified
     // in the VirtualService for the the greeting-service application
     private void waitUntilApplicationIsReady() {
         await()
-                .pollInterval(1, TimeUnit.SECONDS)
-                .atMost(1, TimeUnit.MINUTES)
-                .until(() -> {
-                    try {
-                        Response response = RestAssured.get(istioIngressGatewayRouteURL + "greeting/");
-                        return response.getStatusCode() == 200;
-                    } catch (Exception ignored) {
-                        return false;
-                    }
-                });
+            .pollInterval(1, TimeUnit.SECONDS)
+            .atMost(1, TimeUnit.MINUTES)
+                .untilAsserted(() ->
+                        RestAssured
+                                .when()
+                                .get(istioIngressGatewayRouteURL + "greeting/")
+                                .then()
+                                .statusCode(200)
+                );
     }
 
 }
