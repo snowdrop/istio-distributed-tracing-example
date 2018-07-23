@@ -5,7 +5,7 @@ Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Sprin
 
 == Prerequisites
 . Openshift 3.9 cluster
-. Istio 0.7.1 or 0.8.0 installed on the aforementioned cluster. To install Istio simply follow one of the following docs:
+. Istio 0.8.0 installed on the aforementioned cluster. To install Istio simply follow one of the following docs:
 .. https://istio.io/docs/setup/kubernetes/quick-start.html
 .. https://istio.io/docs/setup/kubernetes/ansible-install.html
 . Enable automatic sidecar injection for Istio (See https://istio.io/docs/setup/kubernetes/sidecar-injection.html[this] for details)
@@ -65,18 +65,18 @@ Run the following commands to apply and execute the OpenShift templates that wil
 ```
 
 = Use Cases
-== Configure an ingress Route to access the application
+== Access the application via the Istio ingress-gateway
 . Create a RouteRule to forward traffic from istio-ingress to the demo application
 +
 ```bash
-    oc create -f rules/route-rule-redir.yml
+    oc create -f rules/greeting-gateway.yml
 ```
 . Access the application
 +
 Run the following command to determine the appropriate URL to access our demo. Make sure you access the url with the HTTP scheme. HTTPS is NOT enabled by default:
 +
 ```bash
-echo http://$(oc get route istio-ingress -o jsonpath='{.spec.host}{"\n"}' -n istio-system)/greeting/
+echo http://$(oc get route istio-ingressgateway -o jsonpath='{.spec.host}{"\n"}' -n istio-system)/greeting/
 ```
 +
 The result of the above command is the istio-system istio-ingress URL, appended with the RouteRule path. Open this URL in your a web browser.
