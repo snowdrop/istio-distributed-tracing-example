@@ -92,6 +92,11 @@
         <artifactId>commons-logging</artifactId>
         <version>${commons-logging.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>3.10.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <modules>

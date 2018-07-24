@@ -1,16 +1,19 @@
 package me.snowdrop.istio.dt;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import org.arquillian.cube.istio.api.IstioResource;
 import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
+import org.assertj.core.api.Condition;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,64 +50,55 @@ public class OpenshiftIT {
 
         TimeUnit.SECONDS.sleep(10); // wait 10 seconds so span will show up in the jaeger
 
-        RestAssured
+        final Response response =
+                RestAssured
                 .given()
                 .baseUri(jaegerQueryURL.toString())
                 .relaxedHTTPSValidation() //jaeger uses https, so we need to trust the cert
                 .param("service", ISTIO_INGRESS_GATEWAY_NAME)
-                .param("start",startTime)
-                .get("/api/traces")
-                .then()
-                .statusCode(200)
-                /*
-                    data[0].processes should contain something like:
+                .param("start", startTime)
+                .get("/api/traces");
 
-                    "p1": {
-                        "serviceName": "istio-ingressgateway",
-                        "tags": [
-                            {
-                                "key": "ip",
-                                "type": "string",
-                                "value": "172.17.0.8"
-                            }
-                        ]
-                    },
-                    "p2": {
-                        "serviceName": "istio-policy",
-                        "tags": [
-                            {
-                                "key": "ip",
-                                "type": "string",
-                                "value": "172.17.0.11"
-                            }
-                        ]
-                    }
+        assertThat(response.statusCode()).isEqualTo(200);
 
-                    ...
+        final JsonPath jsonPath = response.jsonPath();
 
-                 */
-                .body("data[0].processes", new TypeSafeMatcher<Map<String, Object>>() {
+       /*
+           data[0].processes should contain something like:
+           {
+               "p1": {
+                   "serviceName": "istio-ingressgateway",
+                   "tags": [
+                       {
+                           "key": "ip",
+                           "type": "string",
+                           "value": "172.17.0.8"
+                       }
+                   ]
+               },
+               "p2": {
+                   "serviceName": "istio-policy",
+                   "tags": [
+                       {
+                           "key": "ip",
+                           "type": "string",
+                           "value": "172.17.0.11"
+                       }
+                   ]
+               }
 
-                    @Override
-                    public void describeTo(Description description) {}
+               ...
 
-                    @Override
-                    protected boolean matchesSafely(Map<String, Object> item) {
-                        return ensureProcessesMapContainsBothServices(item);
-                    }
+           }
 
-                    private boolean ensureProcessesMapContainsBothServices(
-                            Map<String, Object> item) {
-
-                        return (item
-                                 .values()
-                                 .stream()
-                                 .map(o -> ((Map<String, String>) o).get("serviceName"))
-                                 .filter(n -> n.contains("greeting-service") || n.contains("name-service"))
-                                 .distinct()
-                                 .count()) == 2;
-                    }
-                });
+        */
+        final Map<String, Map> processesMap = jsonPath.getMap("data[0].processes", String.class, Map.class);
+        assertThat(processesMap.values())
+                .isNotEmpty()
+                .extracting("serviceName", String.class)
+                .filteredOn((Predicate<String>) s -> s.contains("spring-boot"))
+                .haveAtLeastOne(isApplicationService("greeting"))
+                .haveAtLeastOne(isApplicationService("cute-name"));
     }
 
     // wait until the Istio Ingress Gateway responds with HTTP 200 at the path that is specified
@@ -122,6 +116,10 @@ public class OpenshiftIT {
                                 .then()
                                 .statusCode(200)
                 );
+    }
+
+    private Condition<String> isApplicationService(String name) {
+        return new Condition<>(s -> s.contains(name), "a trace named: " + name);
     }
 
 }
