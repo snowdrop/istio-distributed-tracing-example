@@ -86,7 +86,7 @@ objects:
     output:
       to:
         kind: ImageStreamTag
-        name: spring-boot-istio-distributed-tracing-greeting-service:BOOSTER_VERSION
+        name: spring-boot-istio-distributed-tracing-greeting-service:1.5.15-2-redhat
     postCommit: {}
     resources: {}
     source:
