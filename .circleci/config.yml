@@ -42,8 +42,8 @@ jobs:
           timeout 300s bash -c 'while [[ $(oc get deployment -l app=prometheus  -n istio-system -o json | jq ".items[0].metadata.name") == "prometheus" ]]; do sleep 10; done; echo ""'
           oc scale deployment -l app=prometheus -n istio-system  --replicas=0
 
-          timeout 300s bash -c 'while [[ $(oc get deployment -l app=egressgateway  -n istio-system -o json | jq ".items[0].metadata.name") == "istio-egressgateway" ]]; do sleep 10; done; echo ""'
-          oc scale deployment -l app=egressgateway -n istio-system  --replicas=0
+          timeout 300s bash -c 'while [[ $(oc get deployment -l app=istio-egressgateway  -n istio-system -o json | jq ".items[0].metadata.name") == "istio-egressgateway" ]]; do sleep 10; done; echo ""'
+          oc scale deployment -l app=istio-egressgateway -n istio-system  --replicas=0
 
           timeout 300s bash -c 'while [[ $(oc get deployment -l app=security  -n istio-system -o json | jq ".items[0].metadata.name") == "istio-citadel" ]]; do sleep 10; done; echo ""'
           oc scale deployment -l app=security -n istio-system  --replicas=0
