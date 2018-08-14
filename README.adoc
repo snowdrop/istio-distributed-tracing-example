@@ -5,7 +5,7 @@ Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Sprin
 
 == Prerequisites
 . Openshift 3.9 cluster
-. Istio 0.8.0 installed on the aforementioned cluster. To install Istio simply follow one of the following docs:
+. Istio 1.0.0 installed on the aforementioned cluster. To install Istio simply follow one of the following docs:
 .. https://istio.io/docs/setup/kubernetes/quick-start.html
 .. https://istio.io/docs/setup/kubernetes/ansible-install.html
 . Enable automatic sidecar injection for Istio (See https://istio.io/docs/setup/kubernetes/sidecar-injection.html[this] for details)
