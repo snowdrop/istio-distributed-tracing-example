@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  OPENSHIFT_3.9.0:
+  OPENSHIFT_3.10.0:
     machine: true
 
     steps:
@@ -14,8 +14,8 @@ jobs:
               chmod +x kubectl && sudo mv kubectl /usr/local/bin/
           echo "Installed kubectl CLI tool"
 
-          istiooc_version="istio-3.9-1.0.0-alpha3"
-          curl -LO https://github.com/openshift-istio/origin/releases/download/${istiooc_version}/istiooc_linux && \
+          istiooc_version="v3.10.0%2Bmaistra-0.1.0"
+          curl -LO https://github.com/Maistra/origin/releases/download/${istiooc_version}/istiooc_linux && \
               chmod +x $PWD/istiooc_linux && sudo mv $PWD/istiooc_linux /usr/local/bin/oc && \
           echo "Installed istiooc CLI tool"
 
@@ -26,7 +26,7 @@ jobs:
           sudo service docker restart
           echo "Configured Docker daemon with insecure-registry"
 
-          oc cluster up --istio
+          oc cluster up --enable=istio
 
           # wait for the Kubernetes Job that starts the Istio installation to commence
           sleep 180
@@ -99,7 +99,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-    - OPENSHIFT_3.9.0:
+    - OPENSHIFT_3.10.0:
         filters:
           branches:
             ignore:
