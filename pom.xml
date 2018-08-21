@@ -180,12 +180,6 @@
                       <value>true</value>
                     </property>
                   </deployment>
-                  <service>
-                    <property>
-                      <name>auth.istio.io/8080</name>
-                      <value>NONE</value>
-                    </property>
-                  </service>
                 </annotations>
               </resources>
             </configuration>
