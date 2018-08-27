@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>spring-boot-istio-rouning-tests</artifactId>
+  <artifactId>spring-boot-istio-distributed-tracing-tests</artifactId>
 
   <dependencies>
     <dependency>
