@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.openshift.booster</groupId>
     <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-    <version>1.5.15-3-SNAPSHOT</version>
+    <version>1.5.15-4-SNAPSHOT</version>
   </parent>
 
   <artifactId>spring-boot-istio-distributed-tracing-greeting-service</artifactId>
