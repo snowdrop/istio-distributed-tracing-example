@@ -24,3 +24,6 @@ spec:
             command:
             - curl
             - http://localhost:8080/health
+        resources:
+          limits:
+            memory: "256Mi"
