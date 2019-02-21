@@ -5,7 +5,7 @@
   <parent>
     <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
     <groupId>io.openshift.booster</groupId>
-    <version>2.1.2-4-SNAPSHOT</version>
+    <version>2.1.2-4-redhat</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
