@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: spring-boot-istio-distributed-tracing-booster-greeting-service
+  name: istio-distributed-tracing-example-greeting-service
   annotations:
     iconClass: icon-spring
     tags: spring-boot, distributed tracing, java, microservice
     openshift.io/display-name: Spring Boot - Istio Distributed Tracing
     openshift.io/provider-display-name: "Red Hat, Inc."
     description: >-
-      The Distributed Tracing Istio booster - greeting service
+      The Distributed Tracing Istio example - greeting service
 parameters:
 - name: RUNTIME_VERSION
   displayName: OpenJDK 8 image version to use
@@ -128,7 +128,7 @@ objects:
       app: spring-boot-istio-distributed-tracing-greeting-service
       provider: snowdrop
       version: "BOOSTER_VERSION"
-      group: io.openshift.booster
+      group: dev.snowdrop.example
     name: spring-boot-istio-distributed-tracing-greeting-service
   spec:
     ports:
@@ -139,7 +139,7 @@ objects:
     selector:
       app: spring-boot-istio-distributed-tracing-greeting-service
       provider: snowdrop
-      group: io.openshift.booster
+      group: dev.snowdrop.example
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -147,7 +147,7 @@ objects:
       app: spring-boot-istio-distributed-tracing-greeting-service
       provider: snowdrop
       version: "BOOSTER_VERSION"
-      group: io.openshift.booster
+      group: dev.snowdrop.example
     name: spring-boot-istio-distributed-tracing-greeting-service
   spec:
     replicas: 1
@@ -155,7 +155,7 @@ objects:
     selector:
       app: spring-boot-istio-distributed-tracing-greeting-service
       provider: snowdrop
-      group: io.openshift.booster
+      group: dev.snowdrop.example
     strategy:
       rollingParams:
         timeoutSeconds: 3600
@@ -168,7 +168,7 @@ objects:
           app: spring-boot-istio-distributed-tracing-greeting-service
           provider: snowdrop
           version: "BOOSTER_VERSION"
-          group: io.openshift.booster
+          group: dev.snowdrop.example
       spec:
         containers:
         - env:
@@ -220,7 +220,7 @@ objects:
       app: spring-boot-istio-distributed-tracing-greeting-service
       provider: snowdrop
       version: "BOOSTER_VERSION"
-      group: io.openshift.booster
+      group: dev.snowdrop.example
     name: spring-boot-istio-distributed-tracing-greeting-service
   spec:
     port:
