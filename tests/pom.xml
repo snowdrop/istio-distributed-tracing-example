@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>spring-boot-istio-distributed-tracing-parent</artifactId>
-    <groupId>io.openshift.booster</groupId>
+    <artifactId>istio-distributed-tracing</artifactId>
+    <groupId>dev.snowdrop.example</groupId>
     <version>1.5.19-3-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -125,12 +125,12 @@
             -->
             <dependencies>
               <dependency>
-                <groupId>io.openshift.booster</groupId>
+                <groupId>dev.snowdrop.example</groupId>
                 <artifactId>spring-boot-istio-distributed-tracing-greeting-service</artifactId>
                 <version>${project.version}</version>
               </dependency>
               <dependency>
-                <groupId>io.openshift.booster</groupId>
+                <groupId>dev.snowdrop.example</groupId>
                 <artifactId>spring-boot-istio-distributed-tracing-cute-name-service</artifactId>
                 <version>${project.version}</version>
               </dependency>
