@@ -17,6 +17,13 @@ Create a new project/namespace on the cluster. This is where your application wi
 oc new-project <whatever valid project name you want>
 ```
 
+In link:https://docs.openshift.com/container-platform/3.11/servicemesh-install/servicemesh-install.html#configuring-security-constraints-for-application-service-accounts[OpenShift] each service account must be granted permissions with the anyuid and privileged Security Context Constraints (SCC) to enable the sidecars to run correctly.
+
+```bash
+oc adm policy add-scc-to-user anyuid -z default -n <whatever valid project name you want>
+oc adm policy add-scc-to-user privileged -z default -n <whatever valid project name you want>
+```
+
 == Build and deploy the application
 
 === With Fabric8 Maven Plugin (FMP)
