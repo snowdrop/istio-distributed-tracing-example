@@ -2,32 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>io.openshift</groupId>
-    <artifactId>booster-parent</artifactId>
-    <version>23</version>
+    <groupId>dev.snowdrop</groupId>
+    <artifactId>snowdrop-dependencies</artifactId>
+    <version>2.2.6-SNAPSHOT</version>
   </parent>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.1.13-4-SNAPSHOT</version>
+  <version>2.2.6-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
   <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <openjdk18-openshift.version>latest</openjdk18-openshift.version>
-    <!--<opentracing-jaeger-starter.version>0.1.4</opentracing-jaeger-starter.version>-->
-    <spring-boot-bom.version>2.1.13.Beta1</spring-boot-bom.version>
-    <spring-boot.version>2.1.13.RELEASE</spring-boot.version>
-    <rest-assured.version>3.1.0</rest-assured.version>
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
-    <arquillian-junit.version>1.4.0.Final</arquillian-junit.version>
+    <arquillian.version>1.4.0.Final</arquillian.version>
     <commons-logging.version>1.2</commons-logging.version>
-    <junit.version>4.12</junit.version>
     <mksapi.version>4.10.9049</mksapi.version>
     <fabric8.generator.from>
       registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:${openjdk18-openshift.version}
     </fabric8.generator.from>
     <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
-    <java.version>1.8</java.version>
     <skip.fmp>true</skip.fmp>
     <!-- Default values  / used when no profile is activated-->
     <greeting-service.port>8090</greeting-service.port>
@@ -46,36 +42,23 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>me.snowdrop</groupId>
-        <artifactId>spring-boot-bom</artifactId>
-        <version>${spring-boot-bom.version}</version>
+        <groupId>org.jboss.arquillian</groupId>
+        <artifactId>arquillian-bom</artifactId>
+        <version>${arquillian.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        <version>${spring-boot.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.rest-assured</groupId>
-        <artifactId>rest-assured</artifactId>
-        <version>${rest-assured.version}</version>
+        <groupId>org.arquillian.cube</groupId>
+        <artifactId>arquillian-cube-bom</artifactId>
+        <version>${arquillian-cube.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
       <dependency>
         <groupId>org.arquillian.cube</groupId>
         <artifactId>arquillian-cube-istio-kubernetes</artifactId>
         <version>${arquillian-cube.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.jboss.arquillian.junit</groupId>
-        <artifactId>arquillian-junit-standalone</artifactId>
-        <version>${arquillian-junit.version}</version>
       </dependency>
       <dependency>
         <groupId>com.mks.api</groupId>
@@ -86,11 +69,6 @@
         <groupId>commons-logging</groupId>
         <artifactId>commons-logging</artifactId>
         <version>${commons-logging.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.assertj</groupId>
-        <artifactId>assertj-core</artifactId>
-        <version>3.10.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -112,15 +90,6 @@
         <filtering>true</filtering>
       </testResource>
     </testResources>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${spring-boot.version}</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -140,30 +109,6 @@
       </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>redhat-early-access</id>
-      <name>Red Hat Early Access Repository</name>
-      <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-    </repository>
-    <repository>
-      <id>redhat-ga</id>
-      <name>Red Hat GA Repository</name>
-      <url>https://maven.repository.redhat.com/ga/</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>redhat-early-access</id>
-      <name>Red Hat Early Access Repository</name>
-      <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-    </pluginRepository>
-    <pluginRepository>
-      <id>redhat-ga</id>
-      <name>Red Hat GA Repository</name>
-      <url>https://maven.repository.redhat.com/ga/</url>
-    </pluginRepository>
-  </pluginRepositories>
   <profiles>
     <profile>
       <id>openshift</id>
