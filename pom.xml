@@ -8,14 +8,14 @@
   </parent>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.1.15-1-SNAPSHOT</version>
+  <version>2.1.15-1-redhat</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
   <properties>
     <openjdk18-openshift.version>latest</openjdk18-openshift.version>
     <!--<opentracing-jaeger-starter.version>0.1.4</opentracing-jaeger-starter.version>-->
-    <spring-boot-bom.version>2.1.15.Beta2</spring-boot-bom.version>
+    <spring-boot-bom.version>2.1.15.Beta2-redhat-00005</spring-boot-bom.version>
     <spring-boot.version>2.1.15.RELEASE</spring-boot.version>
     <rest-assured.version>3.1.0</rest-assured.version>
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
