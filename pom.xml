@@ -15,13 +15,13 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <openjdk18-openshift.version>latest</openjdk18-openshift.version>
+    <ubi.version>1.3</ubi.version>
     <arquillian-cube.version>1.18.2</arquillian-cube.version>
     <arquillian.version>1.4.0.Final</arquillian.version>
     <commons-logging.version>1.2</commons-logging.version>
     <mksapi.version>4.10.9049</mksapi.version>
     <fabric8.generator.from>
-      registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:${openjdk18-openshift.version}
+      registry.access.redhat.com/ubi8/openjdk-8:${ubi.version}
     </fabric8.generator.from>
     <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
     <skip.fmp>true</skip.fmp>
