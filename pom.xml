@@ -4,11 +4,11 @@
   <parent>
     <groupId>dev.snowdrop</groupId>
     <artifactId>snowdrop-dependencies</artifactId>
-    <version>2.3.4.Final</version>
+    <version>2.3.4.Final-redhat-00001</version>
   </parent>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.3.4-2-SNAPSHOT</version>
+  <version>2.3.4-2-redhat</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
