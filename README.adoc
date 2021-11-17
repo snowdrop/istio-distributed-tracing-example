@@ -19,12 +19,11 @@ oc new-project <whatever valid project name you want>
 
 == Build and deploy the application
 
-=== With Fabric8 Maven Plugin (FMP)
+=== With Dekorate:
 Execute the following command to build the project and deploy it to OpenShift:
 ```bash
-mvn clean fabric8:deploy -Popenshift
+mvn clean verify -Popenshift -Ddekorate.deploy=true
 ```
-Configuration for FMP may be found both in pom.xml and `src/main/fabric8` files/folders.
 
 This configuration is used to define service names and deployments that control how pods are labeled/versioned on the OpenShift cluster. Labels and versions are key concepts for creating load-balanced or multi-versioned pods in a service.
 
@@ -43,7 +42,7 @@ Run the following commands to apply and execute the OpenShift templates that wil
 . Create a RouteRule to forward traffic from istio-ingress to the demo application
 +
 ```bash
-    oc create -f rules/greeting-gateway.yml
+oc create -f rules/greeting-gateway.yml
 ```
 . Access the application
 +
@@ -68,11 +67,6 @@ Note that it could take a few seconds for all the spans to be collected and pres
 
 == Undeploy the application
 
-=== With Fabric8 Maven Plugin (FMP)
-```bash
-mvn fabric8:undeploy
-```
-
 === With Source to Image build (S2I)
 ```bash
 oc delete all --all
@@ -91,5 +85,8 @@ oc delete project <your project name>
 To run integration tests, create a new namespace and run maven job
 ```bash
 oc new-project <project-name>
-mvn clean verify -Popenshift,openshift-it
+mvn clean verify -pl spring-boot-istio-distributed-tracing-cute-name-service -Popenshift -Ddekorate.deploy=true
+mvn clean verify -pl spring-boot-istio-distributed-tracing-greeting-service -Popenshift -Ddekorate.deploy=true
+oc create -f rules/greeting-gateway.yml
+mvn clean verify -pl tests -Popenshift-it
 ```

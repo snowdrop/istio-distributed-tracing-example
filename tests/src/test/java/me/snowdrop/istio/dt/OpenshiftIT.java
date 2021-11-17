@@ -1,37 +1,45 @@
 package me.snowdrop.istio.dt;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-import org.arquillian.cube.istio.api.IstioResource;
-import org.arquillian.cube.openshift.impl.enricher.RouteURL;
-import org.assertj.core.api.Condition;
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(Arquillian.class)
-@IstioResource("classpath:greeting-gateway.yml")
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import io.dekorate.testing.annotation.Inject;
+import io.dekorate.testing.openshift.annotation.OpenshiftIntegrationTest;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.openshift.api.model.Route;
+import io.fabric8.openshift.client.OpenShiftClient;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+
+@OpenshiftIntegrationTest(deployEnabled = false, buildEnabled = false)
 public class OpenshiftIT {
 
     private static final String ISTIO_NAMESPACE = "istio-system";
     private static final String JAEGER_QUERY_NAME = "jaeger-query";
     private static final String ISTIO_INGRESS_GATEWAY_NAME = "istio-ingressgateway";
 
-    @RouteURL(value = JAEGER_QUERY_NAME, namespace = ISTIO_NAMESPACE)
-    private URL jaegerQueryURL;
+    @Inject
+    KubernetesClient kubernetesClient;
 
-    @RouteURL(value = ISTIO_INGRESS_GATEWAY_NAME, namespace = ISTIO_NAMESPACE)
+    private URL jaegerQueryURL;
     private URL ingressGatewayURL;
 
+    @BeforeEach
+    public void setup() throws MalformedURLException {
+        jaegerQueryURL = getBaseUrlByRouteName(JAEGER_QUERY_NAME, ISTIO_NAMESPACE);
+        ingressGatewayURL = getBaseUrlByRouteName(ISTIO_INGRESS_GATEWAY_NAME, ISTIO_NAMESPACE);
+    }
 
     /**
      * Interacts with application and test if traces are present in jaeger
@@ -120,6 +128,13 @@ public class OpenshiftIT {
 
     private Condition<String> isApplicationService(String name) {
         return new Condition<>(s -> s.contains(name), "a trace named: " + name);
+    }
+
+    private URL getBaseUrlByRouteName(String routeName, String namespace) throws MalformedURLException {
+        Route route = kubernetesClient.adapt(OpenShiftClient.class).routes().inNamespace(namespace).withName(routeName).get();
+        String protocol = route.getSpec().getTls() == null ? "http" : "https";
+        int port = "http".equals(protocol) ? 80 : 443;
+        return new URL(protocol, route.getSpec().getHost(), port, "/");
     }
 
 }
