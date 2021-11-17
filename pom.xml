@@ -15,18 +15,10 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <ubi.version>1.3</ubi.version>
-    <arquillian-cube.version>1.18.2</arquillian-cube.version>
-    <arquillian.version>1.4.0.Final</arquillian.version>
-    <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
     <commons-logging.version>1.2</commons-logging.version>
     <mksapi.version>4.10.9049</mksapi.version>
-    <fabric8.generator.from>
-      registry.access.redhat.com/ubi8/openjdk-8:${ubi.version}
-    </fabric8.generator.from>
-    <fabric8.openshift.generateRoute>false</fabric8.openshift.generateRoute>
-    <skip.fmp>true</skip.fmp>
     <!-- Default values  / used when no profile is activated-->
     <greeting-service.port>8090</greeting-service.port>
     <cute-name-service.port>8091</cute-name-service.port>
@@ -70,25 +62,6 @@
   
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.jboss.arquillian</groupId>
-        <artifactId>arquillian-bom</artifactId>
-        <version>${arquillian.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.arquillian.cube</groupId>
-        <artifactId>arquillian-cube-bom</artifactId>
-        <version>${arquillian-cube.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.arquillian.cube</groupId>
-        <artifactId>arquillian-cube-istio-kubernetes</artifactId>
-        <version>${arquillian-cube.version}</version>
-      </dependency>
       <dependency>
         <groupId>com.mks.api</groupId>
         <artifactId>mksapi-jar</artifactId>
@@ -143,69 +116,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>openshift</id>
-      <properties>
-        <!-- Override properties / used when deploying to Openshift -->
-        <greeting-service.port>8080</greeting-service.port>
-        <cute-name-service.port>8080</cute-name-service.port>
-        <cute-name-service.endpoint>
-          spring-boot-istio-distributed-tracing-cute-name-service:8080
-        </cute-name-service.endpoint>
-        <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
-      </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>fabric8-maven-plugin</artifactId>
-            <version>4.4.0</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>resource</goal>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <skip>${skip.fmp}</skip>
-              <resources>
-                <annotations>
-                  <deployment>
-                    <property>
-                      <name>sidecar.istio.io/inject</name>
-                      <value>true</value>
-                    </property>
-                  </deployment>
-                </annotations>
-              </resources>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-    <profile>
-      <id>openshift-it</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${maven-failsafe-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration/>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

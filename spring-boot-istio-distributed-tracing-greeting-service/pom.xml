@@ -11,10 +11,6 @@
 
   <artifactId>spring-boot-istio-distributed-tracing-greeting-service</artifactId>
 
-  <properties>
-    <skip.fmp>false</skip.fmp>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -33,4 +29,25 @@
       <artifactId>opentracing-spring-jaeger-web-starter</artifactId>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>openshift</id>
+      <properties>
+        <!-- Override properties / used when deploying to Openshift -->
+        <greeting-service.port>8080</greeting-service.port>
+        <cute-name-service.port>8080</cute-name-service.port>
+        <cute-name-service.endpoint>
+          spring-boot-istio-distributed-tracing-cute-name-service:8080
+        </cute-name-service.endpoint>
+        <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>io.dekorate</groupId>
+          <artifactId>openshift-spring-starter</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

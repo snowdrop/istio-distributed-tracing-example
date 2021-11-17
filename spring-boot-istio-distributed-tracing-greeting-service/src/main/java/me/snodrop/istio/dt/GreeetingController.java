@@ -1,6 +1,7 @@
 package me.snodrop.istio.dt;
 
 import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ public class GreeetingController {
     private final String cutenameServiceName;
 
     public GreeetingController(RestTemplate restTemplate,
-                               @Value("${service.cute-name.name}") String cutenameServiceName) {
+            @Value("${service.cute-name.name:spring-boot-istio-distributed-tracing-cute-name-service}") String cutenameServiceName) {
         this.restTemplate = restTemplate;
         this.cutenameServiceName = cutenameServiceName;
     }
