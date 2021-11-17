@@ -4,9 +4,8 @@
 Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Spring Boot applications
 
 == Prerequisites
-. Openshift 3.10 cluster
-. Istio 1.0.x installed on the aforementioned cluster using the link:https://github.com/Maistra/istio-operator[Istio Operator].
-.. Follow link:https://github.com/Maistra/openshift-ansible/blob/maistra-0.1.0-ocp-3.1.0-istio-1.0.0/istio/Installation.md[these] instructions for more information about the Operator
+. Openshift 4.7 cluster
+. Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.7/service_mesh/v1x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
 . Login to the cluster with the *admin* user
 
 == Environment preparation
@@ -16,6 +15,8 @@ Create a new project/namespace on the cluster. This is where your application wi
 ```bash
 oc new-project <whatever valid project name you want>
 ```
+
+Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.7/service_mesh/v1x/installing-ossm.html#ossm-member-roll-modify-cli_installing-ossm-v1x[link].
 
 == Build and deploy the application
 
