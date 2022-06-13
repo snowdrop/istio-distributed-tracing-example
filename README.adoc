@@ -38,8 +38,9 @@ Run the following commands to apply and execute the OpenShift templates that wil
     oc new-app --template=istio-distributed-tracing-example-cute-name-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/istio-distributed-tracing-example -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=spring-boot-istio-distributed-tracing-cute-name-service
 ```
 
-= Use Cases
-== Access the application via the Istio ingress-gateway
+== Use Cases
+
+=== Access the application via the Istio ingress-gateway
 . Create a RouteRule to forward traffic from istio-ingress to the demo application
 +
 ```bash
@@ -56,7 +57,7 @@ echo http://$(oc get route istio-ingressgateway -o jsonpath='{.spec.host}{"\n"}'
 The result of the above command is the istio-system istio-ingress URL, appended with the RouteRule path. Open this URL in your a web browser.
 . Follow the instructions in the application UI
 
-== View application traces
+=== View application traces
 . Access the Jaeger tracing dashboard
 +
 The traces from the invocation of the two endpoints should look like the following:
@@ -66,16 +67,16 @@ image::spring-boot-istio-distributed-tracing-greeting-service/src/main/resources
 Note that it could take a few seconds for all the spans to be collected and presented in a trace that matches the picture above
 
 
-== Undeploy the application
+=== Undeploy the application
 
-=== With Source to Image build (S2I)
+==== With Source to Image build (S2I)
 ```bash
 oc delete all --all
 oc delete ingress --all
 find . | grep openshiftio | grep application | xargs -n 1 oc delete -f
 ```
 
-=== Remove the namespace
+==== Remove the namespace
 This will delete the project from the OpenShift cluster
 ```bash
 oc delete project <your project name>
