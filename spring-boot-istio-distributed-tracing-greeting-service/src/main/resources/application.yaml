@@ -4,15 +4,14 @@ service:
   cute-name:
     name: ${cute-name-service.endpoint}
 
-opentracing:
-  jaeger:
-    http-sender:
-      url: ${jaeger.endpoint}
-    enable-b3-propagation: true
-    log-spans: true
 spring:
   application:
     name: ${project.artifactId}
+  sleuth:
+    otel:
+      exporter:
+        otlp:
+          endpoint: ${jaeger.endpoint}
 
 # Dekorate
 dekorate:
