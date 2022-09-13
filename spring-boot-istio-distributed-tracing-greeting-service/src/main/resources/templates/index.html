@@ -46,7 +46,7 @@
     </p>
     <h4>The traces can be viewed by navigating to the URL that is produced by the following
       commands</h4>
-    <pre><code>echo https://$(oc get route/jaeger-query -n istio-system  -o 'jsonpath={.spec.host}')</code></pre>
+    <pre><code>echo https://$(oc get route/jaeger -n istio-system  -o 'jsonpath={.spec.host}')</code></pre>
   </div>
 
   <div class="row">

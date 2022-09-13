@@ -6,7 +6,7 @@ Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Sprin
 == Prerequisites
 . JDK 11+ installed with JAVA_HOME configured appropriately
 . Openshift 4.7 cluster
-. Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.7/service_mesh/v1x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
+. Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
 . Login to the cluster with the *admin* user
 
 == Environment preparation
@@ -17,7 +17,7 @@ Create a new project/namespace on the cluster. This is where your application wi
 oc new-project <whatever valid project name you want>
 ```
 
-Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.7/service_mesh/v1x/installing-ossm.html#ossm-member-roll-modify-cli_installing-ossm-v1x[link].
+Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[link].
 
 == Build and deploy the application
 
@@ -28,16 +28,6 @@ mvn clean verify -Popenshift -Ddekorate.deploy=true
 ```
 
 This configuration is used to define service names and deployments that control how pods are labeled/versioned on the OpenShift cluster. Labels and versions are key concepts for creating load-balanced or multi-versioned pods in a service.
-
-
-=== With Source to Image build (S2I)
-Run the following commands to apply and execute the OpenShift templates that will configure and deploy the applications:
-```bash
-    find . | grep openshiftio | grep application | xargs -n 1 oc apply -f
-
-    oc new-app --template=istio-distributed-tracing-example-greeting-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/istio-distributed-tracing-example -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=spring-boot-istio-distributed-tracing-greeting-service
-    oc new-app --template=istio-distributed-tracing-example-cute-name-service -p SOURCE_REPOSITORY_URL=https://github.com/snowdrop/istio-distributed-tracing-example -p SOURCE_REPOSITORY_REF=master -p SOURCE_REPOSITORY_DIR=spring-boot-istio-distributed-tracing-cute-name-service
-```
 
 == Use Cases
 
@@ -69,13 +59,6 @@ Note that it could take a few seconds for all the spans to be collected and pres
 
 
 === Undeploy the application
-
-==== With Source to Image build (S2I)
-```bash
-oc delete all --all
-oc delete ingress --all
-find . | grep openshiftio | grep application | xargs -n 1 oc delete -f
-```
 
 ==== Remove the namespace
 This will delete the project from the OpenShift cluster

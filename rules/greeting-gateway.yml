@@ -30,7 +30,7 @@ spec:
       uri: /
     route:
     - destination:
-        host: spring-boot-istio-distributed-tracing-greeting-service
+        host: greeting-service
         port:
           number: 80
 
