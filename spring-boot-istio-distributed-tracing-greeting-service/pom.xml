@@ -51,9 +51,7 @@
         <!-- Override properties / used when deploying to Openshift -->
         <greeting-service.port>8080</greeting-service.port>
         <cute-name-service.port>8080</cute-name-service.port>
-        <cute-name-service.endpoint>
-          spring-boot-istio-distributed-tracing-cute-name-service:8080
-        </cute-name-service.endpoint>
+        <cute-name-service.endpoint>cute-name-service:8080</cute-name-service.endpoint>
         <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
       </properties>
       <dependencies>

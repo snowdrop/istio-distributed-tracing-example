@@ -16,6 +16,7 @@ spring:
 # Dekorate
 dekorate:
   openshift:
+    name: greeting-service
     expose: true
   s2i:
     builder-image: registry.access.redhat.com/ubi8/openjdk-11:1.14
