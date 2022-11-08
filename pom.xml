@@ -17,7 +17,7 @@
 
     <spring-boot.version>2.7.2</spring-boot.version>
 
-    <dekorate.version>2.11.4</dekorate.version>
+    <dekorate.version>2.11.5</dekorate.version>
 
     <!-- Overriden from Spring Boot -->
     <tomcat.version>9.0.65</tomcat.version>
