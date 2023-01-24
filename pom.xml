@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.7.2-12-SNAPSHOT</version>
+  <version>2.7.8-1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
@@ -15,7 +15,7 @@
     <commons-logging.version>1.2</commons-logging.version>
     <mksapi.version>4.10.9049</mksapi.version>
 
-    <spring-boot.version>2.7.2</spring-boot.version>
+    <spring-boot.version>2.7.8</spring-boot.version>
 
     <dekorate.version>2.11.5</dekorate.version>
 
