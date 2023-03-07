@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.7.9-1</version>
+  <version>2.7.9-1-redhat</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
@@ -30,7 +30,7 @@
     <cute-name-service.port>8091</cute-name-service.port>
     <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
     <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
-  <dekorate>2.11.6</dekorate><tomcat-embed-core>9.0.71</tomcat-embed-core></properties>
+  <dekorate>2.11.5.redhat-00008</dekorate><tomcat-embed-core>9.0.62.redhat-00005</tomcat-embed-core></properties>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
