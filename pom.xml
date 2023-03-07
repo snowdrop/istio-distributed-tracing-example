@@ -30,7 +30,7 @@
     <cute-name-service.port>8091</cute-name-service.port>
     <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
     <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
-  </properties>
+  <dekorate>2.11.6</dekorate><tomcat-embed-core>9.0.71</tomcat-embed-core></properties>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
