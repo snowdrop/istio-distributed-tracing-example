@@ -26,7 +26,7 @@ import io.restassured.response.Response;
 public class OpenshiftIT {
 
     private static final String ISTIO_NAMESPACE = "istio-system";
-    private static final String JAEGER_QUERY_NAME = "jaeger-query";
+    private static final String JAEGER_QUERY_NAME = "jaeger";
     private static final String ISTIO_INGRESS_GATEWAY_NAME = "istio-ingressgateway";
 
     @Inject
