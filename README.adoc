@@ -68,11 +68,15 @@ oc delete project <your project name>
 
 == Integration tests
 
-To run integration tests, create a new namespace and run maven job
-```bash
-oc new-project <project-name>
+To run integration tests, first follow the steps on the <<_environment_preparation>> section to create and prepare a new namespace.
+
+After everything is set up run the following commands.
+
+.Commands to execute the integration tests
+[source,bash]
+----
 mvn clean verify -pl spring-boot-istio-distributed-tracing-cute-name-service -Popenshift -Ddekorate.deploy=true
 mvn clean verify -pl spring-boot-istio-distributed-tracing-greeting-service -Popenshift -Ddekorate.deploy=true
 oc create -f rules/greeting-gateway.yml
 mvn clean verify -pl tests -Popenshift-it
-```
+----
