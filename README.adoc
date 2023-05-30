@@ -9,6 +9,7 @@ Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Sprin
 . Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
 . Login to the cluster with the *admin* user
 
+[#environment-preparation]
 == Environment preparation
 
 Create a new project/namespace on the cluster. This is where your application will be deployed.
@@ -68,7 +69,7 @@ oc delete project <your project name>
 
 == Integration tests
 
-To run integration tests, first follow the steps on the <<_environment_preparation>> section to create and prepare a new namespace.
+To run integration tests, first follow the steps on the <<environment-preparation>> section to create and prepare a new namespace.
 
 After everything is set up run the following commands.
 
