@@ -9,6 +9,7 @@ Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Sprin
 . Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
 . Login to the cluster with the *admin* user
 
+[#environment-preparation]
 == Environment preparation
 
 Create a new project/namespace on the cluster. This is where your application will be deployed.
@@ -17,7 +18,7 @@ Create a new project/namespace on the cluster. This is where your application wi
 oc new-project <whatever valid project name you want>
 ```
 
-Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[link].
+Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/ossm-create-mesh.html#ossm-about-adding-namespace_ossm-create-mesh[link].
 
 == Build and deploy the application
 
@@ -68,11 +69,15 @@ oc delete project <your project name>
 
 == Integration tests
 
-To run integration tests, create a new namespace and run maven job
-```bash
-oc new-project <project-name>
+To run integration tests, first follow the steps on the <<environment-preparation>> section to create and prepare a new namespace.
+
+After everything is set up run the following commands.
+
+.Commands to execute the integration tests
+[source,bash]
+----
 mvn clean verify -pl spring-boot-istio-distributed-tracing-cute-name-service -Popenshift -Ddekorate.deploy=true
 mvn clean verify -pl spring-boot-istio-distributed-tracing-greeting-service -Popenshift -Ddekorate.deploy=true
 oc create -f rules/greeting-gateway.yml
 mvn clean verify -pl tests -Popenshift-it
-```
+----
