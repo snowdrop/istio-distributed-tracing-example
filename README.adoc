@@ -150,7 +150,6 @@ After everything is set up run the following commands.
 .Commands to execute the integration tests
 [source,bash]
 ----
-oc new-project <project-name>
 mvn clean verify -pl spring-boot-istio-distributed-tracing-cute-name-service -Popenshift -Ddekorate.deploy=true
 mvn clean verify -pl spring-boot-istio-distributed-tracing-greeting-service -Popenshift -Ddekorate.deploy=true
 oc create -f rules/greeting-gateway.yml
