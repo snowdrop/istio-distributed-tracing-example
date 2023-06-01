@@ -24,12 +24,13 @@
 
     <spring-cloud-sleuth.version>3.1.8</spring-cloud-sleuth.version>
     <spring-cloud-sleuth-otel.version>1.1.3</spring-cloud-sleuth-otel.version>
+    <opentelemetry-exporter-otlp.version>1.26.0</opentelemetry-exporter-otlp.version>
 
     <!-- Default values  / used when no profile is activated-->
     <greeting-service.port>8090</greeting-service.port>
     <cute-name-service.port>8091</cute-name-service.port>
     <cute-name-service.endpoint>localhost:8091</cute-name-service.endpoint>
-    <jaeger.endpoint>http://localhost:14268/api/traces</jaeger.endpoint>
+    <jaeger.endpoint>http://localhost:4317/api/traces</jaeger.endpoint>
   </properties>
   <licenses>
     <license>
@@ -105,6 +106,11 @@
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-sleuth-otel-autoconfigure</artifactId>
         <version>${spring-cloud-sleuth-otel.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-exporter-otlp</artifactId>
+        <version>${opentelemetry-exporter-otlp.version}</version>
       </dependency>
       <dependency>
         <groupId>com.mks.api</groupId>

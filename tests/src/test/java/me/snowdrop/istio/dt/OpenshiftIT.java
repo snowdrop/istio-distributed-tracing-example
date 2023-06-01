@@ -54,20 +54,18 @@ public class OpenshiftIT {
         RestAssured
                 .given()
                 .baseUri(ingressGatewayURL.toString())
-                .get("/greeting/api/greeting");
+                .get("/greeting/api/greeting")
+                .then().statusCode(200);
 
         TimeUnit.SECONDS.sleep(10); // wait 10 seconds so span will show up in the jaeger
 
-        final Response response =
-                RestAssured
-                .given()
+        final Response response = RestAssured.given()
                 .baseUri(jaegerQueryURL.toString())
                 .relaxedHTTPSValidation() //jaeger uses https, so we need to trust the cert
-                .param("service", ISTIO_INGRESS_GATEWAY_NAME)
+                .param("service", ISTIO_INGRESS_GATEWAY_NAME + "." + ISTIO_NAMESPACE)
                 .param("start", startTime)
-                .get("/api/traces");
-
-        assertThat(response.statusCode()).isEqualTo(200);
+                .get("/api/traces")
+                .then().statusCode(200).extract().response();
 
         final JsonPath jsonPath = response.jsonPath();
 

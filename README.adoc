@@ -71,11 +71,39 @@ oc delete project <your project name>
 
 To run integration tests, first follow the steps on the <<environment-preparation>> section to create and prepare a new namespace.
 
+Moreover, for the integration tests to pass, you need to disable the security of Jaeger UI first. By default, when installing the Red Hat OpenShift distributed tracing platform operator, it will install a Jaeger instance with the security enabled:
+
+[source,yaml]
+----
+  ingress:
+    enabled: true
+    openshift:
+      htpasswdFile: /etc/proxy/htpasswd/auth
+      sar: '{"namespace": "istio-system", "resource": "pods", "verb": "get"}'
+    options: {}
+    resources: {}
+    security: oauth-proxy
+----
+
+To disable, you need to update the Jaeger instance with:
+
+[source,yaml]
+----
+  ingress:
+    enabled: true
+    options: {}
+    resources: {}
+    security: none
+----
+
+And update it. The operator will automatically reload the Jaeger instance with the new configuration.
+
 After everything is set up run the following commands.
 
 .Commands to execute the integration tests
 [source,bash]
 ----
+oc new-project <project-name>
 mvn clean verify -pl spring-boot-istio-distributed-tracing-cute-name-service -Popenshift -Ddekorate.deploy=true
 mvn clean verify -pl spring-boot-istio-distributed-tracing-greeting-service -Popenshift -Ddekorate.deploy=true
 oc create -f rules/greeting-gateway.yml
