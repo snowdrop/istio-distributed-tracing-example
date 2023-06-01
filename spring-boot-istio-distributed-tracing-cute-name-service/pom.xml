@@ -25,6 +25,19 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
+    <!-- Add OpenTelemetry tracer -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-sleuth-otel-autoconfigure</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.opentelemetry</groupId>
+      <artifactId>opentelemetry-exporter-otlp</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -41,12 +54,8 @@
       <id>openshift</id>
       <properties>
         <!-- Override properties / used when deploying to Openshift -->
-        <greeting-service.port>8080</greeting-service.port>
         <cute-name-service.port>8080</cute-name-service.port>
-        <cute-name-service.endpoint>
-          spring-boot-istio-distributed-tracing-cute-name-service:8080
-        </cute-name-service.endpoint>
-        <jaeger.endpoint>http://jaeger-collector.istio-system.svc:14268/api/traces</jaeger.endpoint>
+        <jaeger.endpoint>http://jaeger-collector.istio-system:4317/api/traces</jaeger.endpoint>
       </properties>
       <dependencies>
         <dependency>

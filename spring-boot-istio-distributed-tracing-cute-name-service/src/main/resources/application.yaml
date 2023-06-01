@@ -1,8 +1,19 @@
 server.port: ${cute-name-service.port}
+spring:
+  application:
+    name: ${project.artifactId}
+  sleuth:
+    otel:
+      config:
+        # The trace-id-ratio-based property defines the sampling ratio for the spans collected.
+        # The value 1.0 means that all spans will be exported.
+        trace-id-ratio-based: 1.0
+      exporter:
+        otlp:
+          endpoint: ${jaeger.endpoint}
 # Dekorate
 dekorate:
   openshift:
     name: cute-name-service
-    expose: true
   s2i:
     builder-image: registry.access.redhat.com/ubi8/openjdk-11:1.14

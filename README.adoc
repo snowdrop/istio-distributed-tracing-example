@@ -1,12 +1,15 @@
 = Istio Distributed Tracing Mission
+:icons: font
+:toc: left
+:toclevels: 2
 
 == Purpose
 Showcase Istio's Distributed Tracing via a (minimally) instrumented set of Spring Boot applications
 
 == Prerequisites
 . JDK 11+ installed with JAVA_HOME configured appropriately
-. Openshift 4.7 cluster
-. Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
+. Openshift 4.12 cluster
+. Istio installed on the aforementioned cluster using the link:https://docs.openshift.com/container-platform/4.12/service_mesh/v2x/installing-ossm.html[Red Hat OpenShift Service Mesh Operator].
 . Login to the cluster with the *admin* user
 
 [#environment-preparation]
@@ -18,7 +21,7 @@ Create a new project/namespace on the cluster. This is where your application wi
 oc new-project <whatever valid project name you want>
 ```
 
-Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.11/service_mesh/v2x/ossm-create-mesh.html#ossm-about-adding-namespace_ossm-create-mesh[link].
+Add the `<whatever valid project name you want>` project to the Istio member roll. More information in this link:https://docs.openshift.com/container-platform/4.12/service_mesh/v2x/ossm-create-mesh.html#ossm-about-adding-namespace_ossm-create-mesh[link].
 
 == Build and deploy the application
 
@@ -70,6 +73,77 @@ oc delete project <your project name>
 == Integration tests
 
 To run integration tests, first follow the steps on the <<environment-preparation>> section to create and prepare a new namespace.
+
+=== Remove Jaeger UI security
+
+[CAUTION]
+====
+For the integration tests to work it is required that the Jaeger UI isn't secured by authentication, as it is in the default configuration.
+====
+
+[WARNING]
+=====
+Disabling security isn't the suggested configuration but it is required for the integration tests to work.
+=====
+
+By default, when installing the Red Hat OpenShift distributed tracing platform operator, it will install a Jaeger instance with the security enabled:
+
+.Secured Jaeger UI configuration
+[source,yaml]
+----
+  ingress:
+    enabled: true
+    openshift:
+      htpasswdFile: /etc/proxy/htpasswd/auth
+      sar: '{"namespace": "istio-system", "resource": "pods", "verb": "get"}'
+    options: {}
+    resources: {}
+    security: oauth-proxy
+----
+
+Disabling security is accomplished by setting the `spec.ingress.security` on the Jaeger operator to `none`.
+
+This can be done either by using the OpenShift console (`Installed operators > Red Hat OpenShift distributed tracing platform > Jaguer > Edit Jaeger`) or using the CLI.
+
+[NOTE]
+====
+More information on the Jaeger configuration at the link:https://docs.openshift.com/container-platform/4.12/service_mesh/v2x/ossm-reference-jaeger.html[Jaeger configuration reference page].
+====
+
+To disable security execute the following CLI commands.
+
+.Set the `istio-system` as the default project
+[source,bash]
+----
+oc project istio-system
+----
+
+.Patch jaeger to disable console security
+[source,bash]
+----
+oc patch jaeger jaeger --patch '{"spec":{"ingress":{"security": "none" }}}' --type=merge
+----
+
+The result should be:
+
+[source]
+----
+jaeger.jaegertracing.io/jaeger patched
+----
+
+Which will result in the following configuration.
+
+.Unsecured Jaeger UI configuration
+[source,yaml]
+----
+  ingress:
+    enabled: true
+    options: {}
+    resources: {}
+    security: none
+----
+
+=== Execute the Integration Tests
 
 After everything is set up run the following commands.
 
