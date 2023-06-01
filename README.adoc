@@ -145,7 +145,14 @@ Which will result in the following configuration.
 
 === Execute the Integration Tests
 
-After everything is set up run the following commands.
+After everything is set up, move back to the project where this example will be installed.
+
+[source,bash]
+----
+oc project <whatever valid project name you want>
+----
+
+Then run the following commands.
 
 .Commands to execute the integration tests
 [source,bash]
