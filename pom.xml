@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.7.13-1-SNAPSHOT</version>
+  <version>2.7.13-1</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
@@ -20,9 +20,9 @@
     <dekorate.version>2.11.6</dekorate.version>
 
     <!-- Overriden from Spring Boot -->
-    <tomcat.version>9.0.75</tomcat.version>
+    <tomcat.version>9.0.76</tomcat.version>
 
-    <spring-cloud-sleuth.version>3.1.8</spring-cloud-sleuth.version>
+    <spring-cloud-sleuth.version>3.1.9</spring-cloud-sleuth.version>
     <spring-cloud-sleuth-otel.version>1.1.3</spring-cloud-sleuth-otel.version>
     <opentelemetry-exporter-otlp.version>1.26.0</opentelemetry-exporter-otlp.version>
 
