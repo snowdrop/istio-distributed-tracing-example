@@ -20,7 +20,7 @@
     <dekorate.version>2.11.6</dekorate.version>
 
     <!-- Overriden from Spring Boot -->
-    <tomcat.version>9.0.79</tomcat.version>
+    <tomcat.version>9.0.80</tomcat.version>
 
     <spring-cloud-sleuth.version>3.1.9</spring-cloud-sleuth.version>
     <spring-cloud-sleuth-otel.version>1.1.4</spring-cloud-sleuth-otel.version>
