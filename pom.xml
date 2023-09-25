@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.snowdrop.example</groupId>
   <artifactId>istio-distributed-tracing</artifactId>
-  <version>2.7.16-1-redhat</version>
+  <version>2.7.16-2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Spring Boot - Istio Distributed Tracing Example</name>
   <description>Spring Boot - Istio Distributed Tracing Example</description>
@@ -17,10 +17,10 @@
 
     <spring-boot.version>2.7.16</spring-boot.version>
 
-    <dekorate.version>2.11.5.redhat-00017</dekorate.version>
+    <dekorate.version>2.11.6</dekorate.version>
 
     <!-- Overriden from Spring Boot -->
-    <tomcat.version>9.0.62.redhat-00011</tomcat.version>
+    <tomcat.version>9.0.80</tomcat.version>
 
     <spring-cloud-sleuth.version>3.1.9</spring-cloud-sleuth.version>
     <spring-cloud-sleuth-otel.version>1.1.4</spring-cloud-sleuth-otel.version>
